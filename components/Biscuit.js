@@ -1,8 +1,22 @@
+import Draggable from 'react-draggable'
 import styled from 'styled-components'
+import { darken } from 'polished'
 
-const Biscuit = ({ color }) => <StyledBiscuit color={color} />
+const Biscuit = ({ color }) => (
+  <Draggable axis="both" bounds="parent">
+    <BiscuitContainer>
+      <StyledBiscuit color={color} />
+    </BiscuitContainer>
+  </Draggable>
+)
 
 export default Biscuit
+
+const BiscuitContainer = styled.div`
+  position: absolute;
+  right: 10%;
+  bottom: 10%;
+`
 
 const StyledBiscuit = styled.span`
   background-color: ${(props) => props.color};
@@ -15,6 +29,7 @@ const StyledBiscuit = styled.span`
   width: var(--biscuitSize);
 
   &:active {
+    background-color: ${(props) => darken(0.05, props.color)};
     cursor: grabbing;
     opacity: 0.75;
     transform: scale(2);

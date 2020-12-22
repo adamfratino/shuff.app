@@ -1,17 +1,20 @@
+import { useState } from 'react'
 import styled from 'styled-components'
 import { Button } from './'
 import { amber } from '@material-ui/core/colors'
 
-const Controls = () => (
-  <StyledControls>
-    <Button
-      text="Add Biscuit"
-      backgroundColor={amber[500]}
-      width="100%"
-      onClick={console.log('addBiscuit')}
-    />
-  </StyledControls>
-)
+const Controls = () => {
+  return (
+    <StyledControls>
+      <Button
+        text="Add Biscuit"
+        backgroundColor={amber[500]}
+        width="100%"
+        onClick={console.log('addBiscuit')}
+      />
+    </StyledControls>
+  )
+}
 
 export default Controls
 

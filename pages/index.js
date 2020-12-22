@@ -4,7 +4,7 @@ import { Controls, PageHead, PlayArea } from '../components'
 
 const Home = () => (
   <>
-    <PageHead title="Shuffleboard" />
+    <PageHead title="Board State Visualizer" />
 
     <Main role="main">
       <PlayArea backgroundColor={lightBlue[200]} />
