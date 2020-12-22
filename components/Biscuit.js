@@ -2,10 +2,10 @@ import Draggable from 'react-draggable'
 import styled from 'styled-components'
 import { darken } from 'polished'
 
-const Biscuit = ({ color }) => (
+const Biscuit = ({ color, isVisible }) => (
   <Draggable axis="both" bounds="parent">
     <BiscuitContainer>
-      <StyledBiscuit color={color} />
+      <StyledBiscuit color={color} isVisible={isVisible} />
     </BiscuitContainer>
   </Draggable>
 )
@@ -23,7 +23,7 @@ const StyledBiscuit = styled.span`
   border: 2px solid black;
   border-radius: 50%;
   cursor: grab;
-  display: inline-block;
+  display: ${(props) => (props.isVisible ? 'inline-block' : 'none')};
   height: var(--biscuitSize);
   position: relative;
   width: var(--biscuitSize);

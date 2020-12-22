@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { darken } from 'polished'
 
 const Button = ({ backgroundColor, onClick, text, width }) => (
   <StyledButton
@@ -28,7 +27,6 @@ const StyledButton = styled.button`
   width: ${(props) => props.width};
 
   &:hover {
-    background-color: ${(props) => darken(0.05, props.backgroundColor)};
     box-shadow: 8px 8px 0 0 black;
   }
 
