@@ -5,11 +5,18 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "format": "prettier --write \"**/*.{js, jsx}\""
   },
   "dependencies": {
     "next": "10.0.3",
     "react": "17.0.1",
-    "react-dom": "17.0.1"
+    "react-dom": "17.0.1",
+    "react-draggable": "^4.4.3"
+  },
+  "devDependencies": {
+    "@material-ui/core": "^4.11.2",
+    "polished": "^4.0.5",
+    "styled-components": "^5.2.1"
   }
 }
