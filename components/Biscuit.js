@@ -11,9 +11,30 @@ const StyledBiscuit = styled.span`
   cursor: grab;
   display: inline-block;
   height: var(--biscuitSize);
+  position: relative;
   width: var(--biscuitSize);
 
   &:active {
     cursor: grabbing;
+    opacity: 0.75;
+    transform: scale(2);
+
+    &::before,
+    &::after {
+      position: absolute;
+      background-color: black;
+      bottom: 0;
+      content: '';
+      height: 25%;
+      margin: auto;
+      left: 0;
+      width: 2px;
+      right: 0;
+      top: 0;
+    }
+
+    &::after {
+      transform: rotate(90deg);
+    }
   }
 `
