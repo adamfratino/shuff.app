@@ -1,35 +1,62 @@
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'
-import { lightBlue } from '@material-ui/core/colors'
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
+import { amber, deepOrange, lightBlue } from '@material-ui/core/colors'
 import { Controls, PageHead, PlayArea } from '../components'
 
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: lightBlue[200],
+    },
+    secondary: {
+      main: amber[500],
+    },
+  },
+  tertiary: {
+    main: deepOrange[700],
+  },
+})
+
 const Home = () => {
-  const [activeColorIsYellow, setActiveColorIsYellow] = useState(true)
-  const [yellowBiscuits, setYellowBiscuits] = useState([])
-  const [blackBiscuits, setBlackBiscuits] = useState([])
+  const [isYellow, setIsYellow] = useState(true)
+  const [biscuits, setBiscuits] = useState({
+    yellow: [],
+    black: [],
+  })
 
   const addBiscuit = () => {
-    activeColorIsYellow
-      ? setYellowBiscuits([...yellowBiscuits, 'yellow biscuit'])
-      : setBlackBiscuits([...blackBiscuits, 'black biscuit'])
+    if (isYellow && biscuits.yellow.length < 4) {
+      setBiscuits((prevBiscuits) => ({
+        ...prevBiscuits,
+        yellow: [...prevBiscuits.yellow, 'yellowBiscuit'],
+      }))
+    } else if (!isYellow && biscuits.black.length < 4) {
+      setBiscuits((prevBiscuits) => ({
+        ...prevBiscuits,
+        black: [...prevBiscuits.black, 'blackBiscuit'],
+      }))
+    }
   }
 
   useEffect(() => {
-    console.log(yellowBiscuits, blackBiscuits)
-  }, [yellowBiscuits, blackBiscuits])
+    console.log(biscuits)
+  }, [biscuits])
 
   return (
     <>
       <PageHead title="Board State Visualizer" />
 
-      <Main role="main">
-        <PlayArea backgroundColor={lightBlue[200]} />
-        <Controls
-          activeColorIsYellow={activeColorIsYellow}
-          handleAddBiscuit={addBiscuit}
-          handleToggleActiveColor={() => setActiveColorIsYellow(!activeColorIsYellow)}
-        />
-      </Main>
+      <ThemeProvider theme={theme}>
+        <Main role="main">
+          <PlayArea backgroundColor={lightBlue[200]} biscuits={biscuits} />
+          <Controls
+            isYellow={isYellow}
+            handleAddBiscuit={addBiscuit}
+            handleToggleActiveColor={() => setIsYellow(!isYellow)}
+          />
+        </Main>
+      </ThemeProvider>
     </>
   )
 }
