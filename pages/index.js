@@ -69,6 +69,7 @@ const Main = styled.main`
   display: flex;
   height: 100vh;
   justify-content: center;
+  overflow: hidden;
   position: relative;
   width: 100vw;
 `

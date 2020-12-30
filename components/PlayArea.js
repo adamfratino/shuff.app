@@ -18,8 +18,8 @@ const PlayArea = ({ backgroundColor, biscuits }) => (
 export default PlayArea
 
 const StyledPlayArea = styled.section`
-  border: 16px solid ${(props) => darken(0.1, props.backgroundColor)};
   background-color: ${(props) => props.backgroundColor};
+  border: 16px solid ${(props) => darken(0.1, props.backgroundColor)};
   box-shadow: 0 0 60px -30px black;
   display: flex;
   height: 100%;

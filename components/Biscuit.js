@@ -14,8 +14,13 @@ export default Biscuit
 
 const BiscuitContainer = styled.div`
   position: absolute;
-  right: 10%;
+  left: 10%;
   bottom: 10%;
+
+  @media (min-width: 900px) {
+    left: auto;
+    right: 10%;
+  }
 `
 
 const StyledBiscuit = styled.span`
@@ -32,7 +37,11 @@ const StyledBiscuit = styled.span`
     background-color: ${(props) => darken(0.05, props.color)};
     cursor: grabbing;
     opacity: 0.75;
-    transform: scale(2);
+    transform: scale(4);
+
+    @media (min-width: 900px) {
+      transform: scale(2);
+    }
 
     &::before,
     &::after {
