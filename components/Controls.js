@@ -1,14 +1,23 @@
 import styled from 'styled-components'
-import { Button } from './'
+import { Button, Toggle } from './'
 import { amber } from '@material-ui/core/colors'
 
-const Controls = () => {
-  return (
-    <StyledControls>
-      <Button text="Add Biscuit" backgroundColor={amber[500]} width="100%" />
-    </StyledControls>
-  )
-}
+const Controls = ({ activeColorIsYellow, handleAddBiscuit, handleToggleActiveColor }) => (
+  <StyledControls>
+    <Toggle
+      buttonColor={amber[500]}
+      width="100%"
+      firstButtonIsActive={activeColorIsYellow}
+      handleToggle={handleToggleActiveColor}
+    />
+    <Button
+      text="Add Biscuit"
+      backgroundColor={amber[500]}
+      width="100%"
+      onClick={handleAddBiscuit}
+    />
+  </StyledControls>
+)
 
 export default Controls
 

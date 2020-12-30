@@ -1,17 +1,38 @@
+import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { lightBlue } from '@material-ui/core/colors'
 import { Controls, PageHead, PlayArea } from '../components'
 
-const Home = () => (
-  <>
-    <PageHead title="Board State Visualizer" />
+const Home = () => {
+  const [activeColorIsYellow, setActiveColorIsYellow] = useState(true)
+  const [yellowBiscuits, setYellowBiscuits] = useState([])
+  const [blackBiscuits, setBlackBiscuits] = useState([])
 
-    <Main role="main">
-      <PlayArea backgroundColor={lightBlue[200]} />
-      <Controls />
-    </Main>
-  </>
-)
+  const addBiscuit = () => {
+    activeColorIsYellow
+      ? setYellowBiscuits([...yellowBiscuits, 'yellow biscuit'])
+      : setBlackBiscuits([...blackBiscuits, 'black biscuit'])
+  }
+
+  useEffect(() => {
+    console.log(yellowBiscuits, blackBiscuits)
+  }, [yellowBiscuits, blackBiscuits])
+
+  return (
+    <>
+      <PageHead title="Board State Visualizer" />
+
+      <Main role="main">
+        <PlayArea backgroundColor={lightBlue[200]} />
+        <Controls
+          activeColorIsYellow={activeColorIsYellow}
+          handleAddBiscuit={addBiscuit}
+          handleToggleActiveColor={() => setActiveColorIsYellow(!activeColorIsYellow)}
+        />
+      </Main>
+    </>
+  )
+}
 
 export default Home
 
