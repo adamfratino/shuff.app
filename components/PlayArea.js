@@ -25,5 +25,5 @@ const StyledPlayArea = styled.section`
   height: 100%;
   justify-content: center;
   max-width: 100%;
-  position: absolute;
+  position: relative;
 `

@@ -40,6 +40,7 @@ const Home = () => {
   }
 
   useEffect(() => {
+    document.ontouchmove = (e) => e.preventDefault()
     console.log(biscuits)
   }, [biscuits])
 
@@ -64,6 +65,7 @@ const Home = () => {
 export default Home
 
 const Main = styled.main`
+  -webkit-overflow-scrolling: touch;
   background-color: ${lightBlue[900]};
   align-items: flex-start;
   display: flex;

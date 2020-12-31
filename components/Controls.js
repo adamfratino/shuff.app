@@ -58,7 +58,7 @@ export default Controls
 const ControlsToggle = styled.span`
   align-items: center;
   background-color: ${amber[500]};
-  bottom: 0;
+  bottom: 16px;
   box-shadow: -5px -5px 30px -10px;
   cursor: pointer;
   display: flex;
@@ -66,10 +66,11 @@ const ControlsToggle = styled.span`
   justify-content: center;
   padding: 16px;
   position: absolute;
-  right: 0;
+  right: 16px;
 
   @media (min-width: 900px) {
     bottom: auto;
+    right: 0;
     top: 0;
   }
 `
