@@ -2,13 +2,29 @@ import Draggable from 'react-draggable'
 import styled from 'styled-components'
 import { darken } from 'polished'
 
-const Biscuit = ({ color, isVisible }) => (
-  <Draggable axis="both" bounds="parent">
-    <BiscuitContainer>
-      <StyledBiscuit color={color} isVisible={isVisible} />
-    </BiscuitContainer>
-  </Draggable>
-)
+const Biscuit = ({ color, isVisible }) => {
+  const handleStart = (e, el) => {
+    console.log('start dragging')
+  }
+
+  const handleStop = (e, el) => {
+    console.log('stop dragging')
+  }
+
+  return (
+    <Draggable
+      axis="both"
+      bounds="parent"
+      onStart={handleStart}
+      onStop={handleStop}
+      defaultPosition={{ x: 0, y: 0 }}
+    >
+      <BiscuitContainer>
+        <StyledBiscuit color={color} isVisible={isVisible} />
+      </BiscuitContainer>
+    </Draggable>
+  )
+}
 
 export default Biscuit
 

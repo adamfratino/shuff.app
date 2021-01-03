@@ -4,23 +4,6 @@ import { Button, Drawer, Switch } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
 import { amber, grey } from '@material-ui/core/colors'
 
-const BiscuitSwitch = withStyles({
-  switchBase: {
-    color: amber[500],
-    '&$checked': {
-      color: grey[900],
-    },
-  },
-  checked: {},
-  track: {
-    height: 18,
-  },
-  thumb: {
-    width: 24,
-    height: 24,
-  },
-})(Switch)
-
 const Controls = ({ handleAddBiscuit, handleToggleActiveColor }) => {
   const [menuIsExpanded, setMenuIsExpanded] = useState(false)
 
@@ -54,6 +37,23 @@ const Controls = ({ handleAddBiscuit, handleToggleActiveColor }) => {
 }
 
 export default Controls
+
+const BiscuitSwitch = withStyles({
+  switchBase: {
+    color: amber[500],
+    '&$checked': {
+      color: grey[900],
+    },
+  },
+  checked: {},
+  track: {
+    height: 18,
+  },
+  thumb: {
+    width: 24,
+    height: 24,
+  },
+})(Switch)
 
 const ControlsToggle = styled.span`
   align-items: center;
