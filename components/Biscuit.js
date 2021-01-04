@@ -1,15 +1,33 @@
 import Draggable from 'react-draggable'
 import styled from 'styled-components'
 import { darken } from 'polished'
+import { amber, grey } from '@material-ui/core/colors'
 import { stopDraggingBiscuit } from '../utils'
 
-const Biscuit = ({ color }) => (
-  <Draggable axis="both" bounds="parent" onStop={stopDraggingBiscuit}>
-    <BiscuitContainer>
-      <StyledBiscuit color={color} />
-    </BiscuitContainer>
-  </Draggable>
-)
+const Biscuit = ({ biscuitNumber, biscuits, isYellow, setBiscuits }) => {
+  const color = isYellow ? amber[500] : grey[900]
+
+  const handleDrag = (e, el) => {
+    const updatedCoords = stopDraggingBiscuit(e, el)
+    const newBiscuitsArray = { ...biscuits }
+
+    if (isYellow) {
+      newBiscuitsArray.yellow[biscuitNumber] = updatedCoords
+    } else {
+      newBiscuitsArray.black[biscuitNumber] = updatedCoords
+    }
+
+    setBiscuits(newBiscuitsArray)
+  }
+
+  return (
+    <Draggable axis="both" bounds="parent" onStop={handleDrag}>
+      <BiscuitContainer>
+        <StyledBiscuit color={color} />
+      </BiscuitContainer>
+    </Draggable>
+  )
+}
 
 export default Biscuit
 

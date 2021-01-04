@@ -8,14 +8,14 @@ const stopDraggingBiscuit = (e, el) => {
   const biscuitWidth = el.node.clientWidth
 
   const calculatePercentage = (el, playArea) =>
-    (((el + biscuitWidth / 2) / playArea) * 100).toFixed(2)
+    +(((el + biscuitWidth / 2) / playArea) * 100).toFixed(2)
 
   const biscuitPosition = {
     x: calculatePercentage(el.x, playAreaDimensions.width),
     y: calculatePercentage(el.y, playAreaDimensions.height),
   }
 
-  console.log('stop dragging', biscuitPosition.x, biscuitPosition.y)
+  return [biscuitPosition.x, biscuitPosition.y]
 }
 
 export default stopDraggingBiscuit

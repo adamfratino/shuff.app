@@ -1,17 +1,28 @@
 import { darken } from 'polished'
-import { useContext } from 'react'
 import styled from 'styled-components'
-import { amber, lightBlue, grey } from '@material-ui/core/colors'
+import { lightBlue } from '@material-ui/core/colors'
 import { Biscuit, Court } from './'
 
-const PlayArea = ({ backgroundColor, biscuits }) => {
+const PlayArea = ({ backgroundColor, biscuits, isYellow, setBiscuits }) => {
   return (
     <StyledPlayArea backgroundColor={backgroundColor} className="play-area">
       {biscuits.yellow.map((biscuit, i) => (
-        <Biscuit key={i} color={amber[500]} />
+        <Biscuit
+          key={i}
+          biscuitNumber={i}
+          biscuits={biscuits}
+          isYellow={isYellow}
+          setBiscuits={setBiscuits}
+        />
       ))}
       {biscuits.black.map((biscuit, i) => (
-        <Biscuit key={i} color={grey[900]} />
+        <Biscuit
+          key={i}
+          biscuitNumber={i}
+          biscuits={biscuits}
+          isYellow={isYellow}
+          setBiscuits={setBiscuits}
+        />
       ))}
       <Court fill={lightBlue[50]} stroke="black" />
     </StyledPlayArea>

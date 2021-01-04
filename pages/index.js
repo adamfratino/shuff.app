@@ -17,6 +17,7 @@ const Home = () => {
 
   useEffect(() => {
     updateUrlParams(biscuits, router)
+    console.log(biscuits)
   }, [biscuits])
 
   return (
@@ -25,7 +26,12 @@ const Home = () => {
 
       <ThemeProvider theme={theme}>
         <Main>
-          <PlayArea backgroundColor={lightBlue[200]} biscuits={biscuits} />
+          <PlayArea
+            backgroundColor={lightBlue[200]}
+            biscuits={biscuits}
+            isYellow={isYellow}
+            setBiscuits={setBiscuits}
+          />
           <Controls
             isYellow={isYellow}
             handleAddBiscuit={() => addBiscuit(isYellow, biscuits, setBiscuits)}
