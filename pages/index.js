@@ -4,18 +4,17 @@ import { amber, deepOrange, lightBlue } from '@material-ui/core/colors'
 import { Controls, Main, PageHead, PlayArea } from '../components'
 import { addBiscuit } from '../utils'
 
+const initialBiscuits = {
+  yellow: [],
+  black: [],
+}
+
 const Home = () => {
   const [isYellow, setIsYellow] = useState(true)
-  const [biscuits, setBiscuits] = useState({
-    yellow: [],
-    black: [],
-  })
+  const [biscuits, setBiscuits] = useState(initialBiscuits)
 
   useEffect(() => {
-    console.log(biscuits)
-  }, [biscuits])
-
-  useEffect(() => {
+    // Prevents elastic scroll on mobile devices
     document.ontouchmove = (e) => e.preventDefault()
   }, [])
 
@@ -29,6 +28,7 @@ const Home = () => {
           <Controls
             isYellow={isYellow}
             handleAddBiscuit={() => addBiscuit(isYellow, biscuits, setBiscuits)}
+            handleClearBoard={() => setBiscuits(initialBiscuits)}
             handleToggleActiveColor={() => setIsYellow(!isYellow)}
           />
         </Main>

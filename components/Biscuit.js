@@ -3,19 +3,14 @@ import styled from 'styled-components'
 import { darken } from 'polished'
 
 const Biscuit = ({ color, isVisible }) => {
-  const handleStart = (e, el) => {
-    console.log('start dragging')
-  }
-
   const handleStop = (e, el) => {
-    console.log('stop dragging')
+    console.log('stop dragging', el)
   }
 
   return (
     <Draggable
       axis="both"
       bounds="parent"
-      onStart={handleStart}
       onStop={handleStop}
       defaultPosition={{ x: 0, y: 0 }}
     >
@@ -29,14 +24,9 @@ const Biscuit = ({ color, isVisible }) => {
 export default Biscuit
 
 const BiscuitContainer = styled.div`
+  left: 0;
   position: absolute;
-  left: 10%;
-  bottom: 10%;
-
-  @media (min-width: 900px) {
-    left: auto;
-    right: 10%;
-  }
+  top: 0;
 `
 
 const StyledBiscuit = styled.span`

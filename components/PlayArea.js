@@ -4,7 +4,7 @@ import { amber, lightBlue, grey } from '@material-ui/core/colors'
 import { Biscuit, Court } from './'
 
 const PlayArea = ({ backgroundColor, biscuits }) => (
-  <StyledPlayArea backgroundColor={backgroundColor}>
+  <StyledPlayArea backgroundColor={backgroundColor} className="play-area">
     {biscuits.yellow.map((biscuit, i) => (
       <Biscuit key={i} color={amber[500]} isVisible />
     ))}
