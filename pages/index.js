@@ -17,12 +17,11 @@ const Home = () => {
 
   useEffect(() => {
     updateUrlParams(biscuits, router)
-    console.log(biscuits)
   }, [biscuits])
 
   return (
     <>
-      <PageHead title="Board State Visualizer" />
+      <PageHead title="Shuffleboard Visualizer" />
 
       <ThemeProvider theme={theme}>
         <Main>

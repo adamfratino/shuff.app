@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { Button, Drawer, Switch } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
 import { amber, grey } from '@material-ui/core/colors'
+import { Colophon } from './'
 
 const Controls = ({
   handleAddBiscuit,
@@ -44,6 +45,7 @@ const Controls = ({
           >
             Clear Board
           </Button>
+          <Colophon />
         </ControlsContainer>
       </Drawer>
     </>
@@ -98,6 +100,10 @@ const SwitchContainer = styled.div`
 `
 
 const ControlsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-width: 320px;
   padding: 16px;
 
   & > *:not(:last-child) {
