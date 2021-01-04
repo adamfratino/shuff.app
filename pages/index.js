@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
 import { amber, deepOrange, lightBlue } from '@material-ui/core/colors'
 import { Controls, Main, PageHead, PlayArea } from '../components'
-import { addBiscuit } from '../utils'
+import { addBiscuit, updateUrlParams } from '../utils'
 
 const initialBiscuits = {
   yellow: [],
@@ -13,19 +13,10 @@ const initialBiscuits = {
 const Home = () => {
   const [isYellow, setIsYellow] = useState(true)
   const [biscuits, setBiscuits] = useState(initialBiscuits)
-
   const router = useRouter()
 
   useEffect(() => {
-    if (biscuits.yellow.length && !biscuits.black.length) {
-      router.push(`?yellow=${biscuits.yellow}`)
-    } else if (!biscuits.yellow.length && biscuits.black.length) {
-      router.push(`?black=${biscuits.black}`)
-    } else if (biscuits.yellow.length && biscuits.black.length) {
-      router.push(`?yellow=${biscuits.yellow}&black=${biscuits.black}`)
-    } else {
-      router.push('/')
-    }
+    updateUrlParams(biscuits, router)
   }, [biscuits])
 
   return (

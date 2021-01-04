@@ -4,7 +4,12 @@ import { Button, Drawer, Switch } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
 import { amber, grey } from '@material-ui/core/colors'
 
-const Controls = ({ handleAddBiscuit, handleClearBoard, handleToggleActiveColor }) => {
+const Controls = ({
+  handleAddBiscuit,
+  handleClearBoard,
+  handleToggleActiveColor,
+  isYellow,
+}) => {
   const [menuIsExpanded, setMenuIsExpanded] = useState(false)
 
   const toggleDrawer = (isOpen) => setMenuIsExpanded(isOpen)
@@ -18,7 +23,7 @@ const Controls = ({ handleAddBiscuit, handleClearBoard, handleToggleActiveColor 
         <ControlsContainer>
           <SwitchContainer>
             <span>Yellow</span>
-            <BiscuitSwitch onChange={handleToggleActiveColor} />
+            <BiscuitSwitch checked={!isYellow} onChange={handleToggleActiveColor} />
             <span>Black</span>
           </SwitchContainer>
           <Button
