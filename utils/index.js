@@ -1,5 +1,5 @@
 import addBiscuit from './addBiscuit'
-import stopDraggingBiscuit from './stopDraggingBiscuit'
+import updateBiscuitCoordinates from './updateBiscuitCoordinates'
 import updateUrlParams from './updateUrlParams'
 
-export { addBiscuit, stopDraggingBiscuit, updateUrlParams }
+export { addBiscuit, updateBiscuitCoordinates, updateUrlParams }

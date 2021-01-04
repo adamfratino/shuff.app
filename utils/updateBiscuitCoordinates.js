@@ -1,4 +1,4 @@
-const stopDraggingBiscuit = (e, el) => {
+const updateBiscuitCoordinates = (e, el) => {
   const playArea = document.querySelector('.play-area')
 
   const playAreaDimensions = {
@@ -18,4 +18,4 @@ const stopDraggingBiscuit = (e, el) => {
   return [biscuitPosition.x, biscuitPosition.y]
 }
 
-export default stopDraggingBiscuit
+export default updateBiscuitCoordinates
