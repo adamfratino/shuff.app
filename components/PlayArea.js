@@ -1,6 +1,6 @@
 import { darken } from 'polished'
 import styled from 'styled-components'
-import { lightBlue } from '@material-ui/core/colors'
+import { amber, grey, lightBlue } from '@material-ui/core/colors'
 import { Biscuit, Court } from './'
 
 const PlayArea = ({ backgroundColor, biscuits, isYellow, setBiscuits }) => {
@@ -9,6 +9,7 @@ const PlayArea = ({ backgroundColor, biscuits, isYellow, setBiscuits }) => {
       {biscuits.yellow.map((biscuit, i) => (
         <Biscuit
           key={i}
+          color={amber[500]}
           biscuitNumber={i}
           biscuits={biscuits}
           isYellow={isYellow}
@@ -18,6 +19,7 @@ const PlayArea = ({ backgroundColor, biscuits, isYellow, setBiscuits }) => {
       {biscuits.black.map((biscuit, i) => (
         <Biscuit
           key={i}
+          color={grey[900]}
           biscuitNumber={i}
           biscuits={biscuits}
           isYellow={isYellow}
