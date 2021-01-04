@@ -2,12 +2,12 @@ const addBiscuit = (isYellow, biscuits, setBiscuits) => {
   if (isYellow && biscuits.yellow.length < 4) {
     setBiscuits((prevBiscuits) => ({
       ...prevBiscuits,
-      yellow: [...prevBiscuits.yellow, 'yellowBiscuit'],
+      yellow: [...prevBiscuits.yellow, [0, 0]],
     }))
   } else if (!isYellow && biscuits.black.length < 4) {
     setBiscuits((prevBiscuits) => ({
       ...prevBiscuits,
-      black: [...prevBiscuits.black, 'blackBiscuit'],
+      black: [...prevBiscuits.black, [0, 0]],
     }))
   }
 }

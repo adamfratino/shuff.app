@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
 import { amber, deepOrange, lightBlue } from '@material-ui/core/colors'
@@ -13,10 +14,19 @@ const Home = () => {
   const [isYellow, setIsYellow] = useState(true)
   const [biscuits, setBiscuits] = useState(initialBiscuits)
 
+  const router = useRouter()
+
   useEffect(() => {
-    // Prevents elastic scroll on mobile devices
-    document.ontouchmove = (e) => e.preventDefault()
-  }, [])
+    if (biscuits.yellow.length && !biscuits.black.length) {
+      router.push(`?yellow=${biscuits.yellow}`)
+    } else if (!biscuits.yellow.length && biscuits.black.length) {
+      router.push(`?black=${biscuits.black}`)
+    } else if (biscuits.yellow.length && biscuits.black.length) {
+      router.push(`?yellow=${biscuits.yellow}&black=${biscuits.black}`)
+    } else {
+      router.push('/')
+    }
+  }, [biscuits])
 
   return (
     <>
