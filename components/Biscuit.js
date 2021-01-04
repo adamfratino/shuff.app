@@ -3,10 +3,10 @@ import styled from 'styled-components'
 import { darken } from 'polished'
 import { stopDraggingBiscuit } from '../utils'
 
-const Biscuit = ({ color, isVisible }) => (
+const Biscuit = ({ color }) => (
   <Draggable axis="both" bounds="parent" onStop={stopDraggingBiscuit}>
     <BiscuitContainer>
-      <StyledBiscuit color={color} isVisible={isVisible} />
+      <StyledBiscuit color={color} />
     </BiscuitContainer>
   </Draggable>
 )
@@ -24,7 +24,7 @@ const StyledBiscuit = styled.span`
   border: 2px solid black;
   border-radius: 50%;
   cursor: grab;
-  display: ${(props) => (props.isVisible ? 'inline-block' : 'none')};
+  display: inline-block;
   height: var(--biscuitSize);
   position: relative;
   width: var(--biscuitSize);
