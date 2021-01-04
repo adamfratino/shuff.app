@@ -12,7 +12,7 @@ const StyledMain = styled.main`
   display: flex;
   height: 100vh;
   justify-content: center;
-  overflow: hidden;
+  overflow: auto;
   position: relative;
   width: 100vw;
 `

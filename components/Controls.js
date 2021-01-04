@@ -32,7 +32,7 @@ const Controls = ({ handleAddBiscuit, handleClearBoard, handleToggleActiveColor 
           </Button>
           <Button
             variant="outlined"
-            color="black"
+            color="default"
             size="large"
             fullWidth
             onClick={handleClearBoard}

@@ -1,6 +1,7 @@
 import Draggable from 'react-draggable'
 import styled from 'styled-components'
 import { darken } from 'polished'
+import { stopDraggingBiscuit } from '../utils'
 
 const Biscuit = ({ color, isVisible }) => {
   const handleStop = (e, el) => {
@@ -11,7 +12,7 @@ const Biscuit = ({ color, isVisible }) => {
     <Draggable
       axis="both"
       bounds="parent"
-      onStop={handleStop}
+      onStop={stopDraggingBiscuit}
       defaultPosition={{ x: 0, y: 0 }}
     >
       <BiscuitContainer>

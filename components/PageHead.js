@@ -20,6 +20,7 @@ const PageHead = ({ title }) => (
       rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Lato:300,400,500,700,900&display=swap"
     />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/inobounce/0.2.0/inobounce.min.js"></script>
   </Head>
 )
 
