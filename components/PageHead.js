@@ -8,7 +8,7 @@ const PageHead = ({ title }) => (
       name="viewport"
       content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui"
     />
-    <meta name="theme-color" content="#000000" />
+    <meta name="theme-color" content="#50c3f8" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <link
       rel="stylesheet"
