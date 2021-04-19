@@ -7,7 +7,7 @@ export default Main
 
 const StyledMain = styled.main`
   -webkit-overflow-scrolling: touch;
-  background-color: ${lightBlue[900]};
+  background-color: ${(props) => props.theme.pageBg};
   align-items: flex-start;
   display: flex;
   height: 100vh;

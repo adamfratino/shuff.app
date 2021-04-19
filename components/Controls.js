@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { Button, Drawer, Switch } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
 import { amber, grey } from '@material-ui/core/colors'
+import ColorPicker from 'material-ui-color-picker'
 import { Colophon } from './'
 
 const Controls = ({
@@ -27,22 +28,10 @@ const Controls = ({
             <BiscuitSwitch checked={!isYellow} onChange={handleToggleActiveColor} />
             <span>Black</span>
           </SwitchContainer>
-          <Button
-            variant="contained"
-            color="secondary"
-            size="large"
-            fullWidth
-            onClick={handleAddBiscuit}
-          >
+          <Button variant="contained" size="large" fullWidth onClick={handleAddBiscuit}>
             Add Biscuit
           </Button>
-          <Button
-            variant="outlined"
-            color="default"
-            size="large"
-            fullWidth
-            onClick={handleClearBoard}
-          >
+          <Button variant="outlined" size="large" fullWidth onClick={handleClearBoard}>
             Clear Board
           </Button>
           <Colophon />

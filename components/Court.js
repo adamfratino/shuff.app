@@ -141,16 +141,15 @@ export default Court
 const CourtSvg = styled.svg`
   /* overflow: visible; */
   height: 100%;
-  max-width: auto;
 
   * {
     fill: transparent;
-    stroke: ${(props) => props.stroke};
+    stroke: ${(props) => props.theme.courtLines};
     stroke-miterlimit: 10;
 
     &.kitchen-triangle,
     &.scoring-numbers * {
-      fill: ${(props) => props.stroke};
+      fill: ${(props) => props.theme.courtLines};
     }
 
     &.scoring-areas *,
@@ -160,7 +159,7 @@ const CourtSvg = styled.svg`
     }
 
     &.scoring-areas * {
-      fill: ${(props) => props.fill};
+      fill: ${(props) => props.theme.scoringArea};
     }
   }
 `
