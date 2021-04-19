@@ -1,3 +1,7 @@
+:root {
+  --board-color: #81d4fa;
+}
+
 html,
 body {
   background-color: #50c3f8;

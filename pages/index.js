@@ -22,11 +22,10 @@ const Home = () => {
   return (
     <>
       <PageHead title="Shuffleboard Visualizer" />
-
       <ThemeProvider theme={theme}>
         <Main>
           <PlayArea
-            backgroundColor={lightBlue[200]}
+            backgroundColor="var(--boardColor)"
             biscuits={biscuits}
             isYellow={isYellow}
             setBiscuits={setBiscuits}

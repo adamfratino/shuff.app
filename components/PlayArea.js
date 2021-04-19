@@ -1,4 +1,3 @@
-import { darken } from 'polished'
 import styled from 'styled-components'
 import { amber, grey, lightBlue } from '@material-ui/core/colors'
 import { Biscuit, Court } from './'
@@ -34,8 +33,8 @@ const PlayArea = ({ backgroundColor, biscuits, isYellow, setBiscuits }) => {
 export default PlayArea
 
 const StyledPlayArea = styled.section`
-  background-color: ${(props) => props.backgroundColor};
-  border: 16px solid ${(props) => darken(0.1, props.backgroundColor)};
+  background-color: var(--board-color);
+  border: 16px solid transparent;
   box-shadow: 0 0 60px -30px black;
   display: flex;
   height: 100%;
