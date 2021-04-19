@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import { Button, Drawer, Switch } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
 import { amber, grey } from '@material-ui/core/colors'
-import ColorPicker from 'material-ui-color-picker'
 import { Colophon } from './'
 
 const Controls = ({
