@@ -3,7 +3,7 @@ import styled from 'styled-components'
 const Colophon = () => (
   <StyledColophon>
     Built with <span>♥</span> by{' '}
-    <a href="//adamfratino.com" target="_blank">
+    <a href="//fratino.dev" target="_blank">
       Adam Fratino
     </a>
   </StyledColophon>
