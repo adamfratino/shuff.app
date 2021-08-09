@@ -4,7 +4,7 @@ import { darken } from 'polished'
 import { updateBiscuitCoordinates } from '../utils'
 import { biscuitColor } from '../tokens'
 
-const Biscuit = ({ color, biscuitNumber, biscuits, setBiscuits }) => {
+const Biscuit = ({ color, biscuitNumber, biscuits, setBiscuits, visibleNumbers }) => {
   const handleDrag = (e, el) => {
     const updatedCoords = updateBiscuitCoordinates(e, el)
     const newBiscuitsArray = { ...biscuits }
@@ -22,7 +22,9 @@ const Biscuit = ({ color, biscuitNumber, biscuits, setBiscuits }) => {
     <Draggable axis="both" bounds="parent" onStop={handleDrag}>
       <BiscuitContainer>
         <StyledBiscuit color={color}>
-          <span className="biscuit-number">{biscuitNumber + 1}</span>
+          <span className={`biscuit-number ${visibleNumbers ? 'is-visible' : ''}`}>
+            {biscuitNumber + 1}
+          </span>
         </StyledBiscuit>
       </BiscuitContainer>
     </Draggable>
@@ -80,7 +82,15 @@ const StyledBiscuit = styled.span`
     }
 
     .biscuit-number {
-      display: none;
+      display: none !important;
+    }
+  }
+
+  .biscuit-number {
+    display: none;
+
+    &.is-visible {
+      display: inline-block;
     }
   }
 `

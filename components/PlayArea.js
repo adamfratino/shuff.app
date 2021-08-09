@@ -1,28 +1,30 @@
 import styled from 'styled-components'
-import { amber, grey } from '@material-ui/core/colors'
 import { Biscuit, Court } from './'
+import { biscuitColor } from '../tokens'
 
-const PlayArea = ({ biscuits, isYellow, setBiscuits }) => {
+const PlayArea = ({ biscuits, isYellow, setBiscuits, visibleNumbers }) => {
   return (
     <StyledPlayArea className="play-area">
       {biscuits.yellow.map((biscuit, i) => (
         <Biscuit
           key={i}
-          color={amber[500]}
+          color={biscuitColor.light}
           biscuitNumber={i}
           biscuits={biscuits}
           isYellow={isYellow}
           setBiscuits={setBiscuits}
+          visibleNumbers={visibleNumbers}
         />
       ))}
       {biscuits.black.map((biscuit, i) => (
         <Biscuit
           key={i}
-          color={grey[900]}
+          color={biscuitColor.dark}
           biscuitNumber={i}
           biscuits={biscuits}
           isYellow={isYellow}
           setBiscuits={setBiscuits}
+          visibleNumbers={visibleNumbers}
         />
       ))}
       <Court stroke="black" />
