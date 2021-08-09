@@ -8,6 +8,7 @@ import { biscuitColor } from '../tokens'
 const Controls = ({
   handleAddBiscuit,
   handleClearBoard,
+  handleToggleNumbers,
   handleToggleActiveColor,
   isYellow,
 }) => {
@@ -29,6 +30,14 @@ const Controls = ({
           </SwitchContainer>
           <Button variant="contained" size="large" fullWidth onClick={handleAddBiscuit}>
             Add Biscuit
+          </Button>
+          <Button
+            variant="contained"
+            size="large"
+            fullWidth
+            onClick={handleToggleNumbers}
+          >
+            Toggle Numbers
           </Button>
           <Button variant="outlined" size="large" fullWidth onClick={handleClearBoard}>
             Clear Board

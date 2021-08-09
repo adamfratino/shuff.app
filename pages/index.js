@@ -1,10 +1,9 @@
 import { useRouter } from 'next/router'
-import { darken } from 'polished'
 import { useEffect, useState } from 'react'
 import { ThemeProvider } from 'styled-components'
-import { green, lightBlue } from '@material-ui/core/colors'
 import { Controls, Main, PageHead, PlayArea } from '../components'
 import { addBiscuit, updateUrlParams } from '../utils'
+import { defaultTheme } from '../themes'
 
 const initialBiscuits = {
   yellow: [],
@@ -14,6 +13,7 @@ const initialBiscuits = {
 const Home = () => {
   const [isYellow, setIsYellow] = useState(true)
   const [biscuits, setBiscuits] = useState(initialBiscuits)
+  const [visibileNumbers, setVisibleNumbers] = useState(false)
   const [theme, setTheme] = useState(defaultTheme)
   const router = useRouter()
 
@@ -26,11 +26,17 @@ const Home = () => {
       <PageHead title="Shuffleboard Visualizer" />
       <ThemeProvider theme={theme}>
         <Main>
-          <PlayArea biscuits={biscuits} isYellow={isYellow} setBiscuits={setBiscuits} />
+          <PlayArea
+            biscuits={biscuits}
+            isYellow={isYellow}
+            setBiscuits={setBiscuits}
+            visibleNumbers={visibileNumbers}
+          />
           <Controls
             isYellow={isYellow}
             handleAddBiscuit={() => addBiscuit(isYellow, biscuits, setBiscuits)}
             handleClearBoard={() => setBiscuits(initialBiscuits)}
+            handleToggleNumbers={() => setVisibleNumbers(!visibileNumbers)}
             handleToggleActiveColor={() => setIsYellow(!isYellow)}
           />
         </Main>
@@ -40,21 +46,3 @@ const Home = () => {
 }
 
 export default Home
-
-const blueTheme = {
-  pageBg: lightBlue[800],
-  courtBg: lightBlue[200],
-  borderColor: darken(0.1, lightBlue[200]),
-  scoringArea: lightBlue[50],
-  courtLines: 'black',
-}
-
-const greenTheme = {
-  pageBg: green[200],
-  courtBg: green[800],
-  borderColor: darken(0.2, green[700]),
-  scoringArea: green[500],
-  courtLines: 'white',
-}
-
-const defaultTheme = greenTheme
