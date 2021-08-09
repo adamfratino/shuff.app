@@ -1,17 +1,19 @@
 import Draggable from 'react-draggable'
 import styled from 'styled-components'
-import { amber } from '@material-ui/core/colors'
 import { darken } from 'polished'
 import { updateBiscuitCoordinates } from '../utils'
+import { biscuitColor } from '../tokens'
 
 const Biscuit = ({ color, biscuitNumber, biscuits, setBiscuits }) => {
   const handleDrag = (e, el) => {
     const updatedCoords = updateBiscuitCoordinates(e, el)
     const newBiscuitsArray = { ...biscuits }
 
-    color === amber[500]
+    color === biscuitColor.light
       ? (newBiscuitsArray.yellow[biscuitNumber] = updatedCoords)
       : (newBiscuitsArray.black[biscuitNumber] = updatedCoords)
+
+    console.log('handleDrag')
 
     setBiscuits(newBiscuitsArray)
   }
@@ -19,7 +21,9 @@ const Biscuit = ({ color, biscuitNumber, biscuits, setBiscuits }) => {
   return (
     <Draggable axis="both" bounds="parent" onStop={handleDrag}>
       <BiscuitContainer>
-        <StyledBiscuit color={color} />
+        <StyledBiscuit color={color}>
+          <span className="biscuit-number">{biscuitNumber + 1}</span>
+        </StyledBiscuit>
       </BiscuitContainer>
     </Draggable>
   )
@@ -34,12 +38,16 @@ const BiscuitContainer = styled.div`
 `
 
 const StyledBiscuit = styled.span`
+  align-items: center;
   background-color: ${(props) => props.color};
+  color: ${(props) => (props.color === biscuitColor.light ? 'black' : 'white')};
   border: 2px solid black;
   border-radius: 50%;
   cursor: grab;
-  display: inline-block;
+  display: inline-flex;
+  font-weight: bold;
   height: var(--biscuitSize);
+  justify-content: center;
   position: relative;
   width: var(--biscuitSize);
 
@@ -69,6 +77,10 @@ const StyledBiscuit = styled.span`
 
     &::after {
       transform: rotate(90deg);
+    }
+
+    .biscuit-number {
+      display: none;
     }
   }
 `

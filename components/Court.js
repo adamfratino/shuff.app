@@ -40,7 +40,7 @@ const Court = ({ fill, stroke }) => {
         <polygon
           id="Kitchen_Triangle"
           className="kitchen-triangle"
-          points="33.97,0.5 37.98,0.5 36,18.44 "
+          points="33.97,2 37.98,2 36,18.44 "
         />
         <g id="Scoring_Numbers" className="scoring-numbers">
           <g id="OFF">
