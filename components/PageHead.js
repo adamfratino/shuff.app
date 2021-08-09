@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import { defaultTheme } from '../themes'
 
 const PageHead = ({ title }) => (
   <Head>
@@ -8,7 +9,7 @@ const PageHead = ({ title }) => (
       name="viewport"
       content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui"
     />
-    <meta name="theme-color" content="#50c3f8" />
+    <meta name="theme-color" content={defaultTheme.borderColor} />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-title" content="shuff.app" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
