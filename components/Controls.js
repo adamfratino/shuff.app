@@ -2,8 +2,8 @@ import { useState } from 'react'
 import styled from 'styled-components'
 import { Button, Drawer, Switch } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
-import { amber, grey } from '@material-ui/core/colors'
 import { Colophon } from './'
+import { biscuitColor } from '../tokens'
 
 const Controls = ({
   handleAddBiscuit,
@@ -44,9 +44,9 @@ export default Controls
 
 const BiscuitSwitch = withStyles({
   switchBase: {
-    color: amber[500],
+    color: biscuitColor.light,
     '&$checked': {
-      color: grey[900],
+      color: biscuitColor.dark,
     },
   },
   checked: {},
@@ -61,7 +61,7 @@ const BiscuitSwitch = withStyles({
 
 const ControlsToggle = styled.span`
   align-items: center;
-  background-color: ${amber[500]};
+  background-color: ${biscuitColor.light};
   bottom: 16px;
   box-shadow: -5px -5px 30px -10px;
   cursor: pointer;
