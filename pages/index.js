@@ -13,7 +13,7 @@ const initialBiscuits = {
 const Home = () => {
   const [isYellow, setIsYellow] = useState(true)
   const [biscuits, setBiscuits] = useState(initialBiscuits)
-  const [visibileNumbers, setVisibleNumbers] = useState(false)
+  const [visibleNumbers, setVisibleNumbers] = useState(false)
   const [theme, setTheme] = useState(defaultTheme)
   const router = useRouter()
 
@@ -30,13 +30,14 @@ const Home = () => {
             biscuits={biscuits}
             isYellow={isYellow}
             setBiscuits={setBiscuits}
-            visibleNumbers={visibileNumbers}
+            visibleNumbers={visibleNumbers}
           />
           <Controls
             isYellow={isYellow}
+            visibleNumbers={visibleNumbers}
             handleAddBiscuit={() => addBiscuit(isYellow, biscuits, setBiscuits)}
             handleClearBoard={() => setBiscuits(initialBiscuits)}
-            handleToggleNumbers={() => setVisibleNumbers(!visibileNumbers)}
+            handleToggleNumbers={() => setVisibleNumbers(!visibleNumbers)}
             handleToggleActiveColor={() => setIsYellow(!isYellow)}
           />
         </Main>
