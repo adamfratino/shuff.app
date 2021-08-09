@@ -24,6 +24,9 @@ const Controls = ({
       </ControlsToggle>
       <Drawer anchor="right" open={menuIsExpanded} onClose={() => toggleDrawer(false)}>
         <ControlsContainer>
+          <CloseButton onClick={() => setMenuIsExpanded(false)}>
+            &times; <span>Close</span>
+          </CloseButton>
           <ControlsGroup>
             <SwitchContainer>
               <span>Yellow</span>
@@ -66,6 +69,23 @@ const BiscuitSwitch = withStyles({
     height: 24,
   },
 })(Switch)
+
+const CloseButton = styled.button`
+  align-self: flex-end;
+  appearance: none;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  display: inline-flex;
+  font-weight: bold;
+  text-transform: uppercase;
+
+  span {
+    display: inline-block;
+    font-size: 12px;
+    margin-left: 4px;
+  }
+`
 
 const ControlsGroup = styled.div`
   border: 1px solid black;
