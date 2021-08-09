@@ -10,14 +10,16 @@ const initialBiscuits = {
   black: [],
 }
 
+const initialScore = {
+  yellow: 0,
+  black: 0,
+  frame: 1,
+}
+
 const Home = () => {
   const [isYellow, setIsYellow] = useState(true)
   const [biscuits, setBiscuits] = useState(initialBiscuits)
-  const [score, setScore] = useState({
-    yellow: 0,
-    black: 0,
-    frame: 1,
-  })
+  const [score, setScore] = useState(initialScore)
   const [visibleNumbers, setVisibleNumbers] = useState(false)
   const [visibleScoreboard, setVisibleScoreboard] = useState(false)
   const [theme, setTheme] = useState(defaultTheme)
@@ -57,6 +59,7 @@ const Home = () => {
             handleToggleActiveColor={() => setIsYellow(!isYellow)}
             handleSetScore={(score) => setScore(score)}
             handleToggleScoreboard={() => setVisibleScoreboard(!visibleScoreboard)}
+            handleClearScore={() => setScore(initialScore)}
           />
         </Main>
       </ThemeProvider>

@@ -1,8 +1,14 @@
 import styled from 'styled-components'
 import { biscuitColor } from '../tokens'
 
+const BOX_WIDTH = `48px`
+
 const Scoreboard = ({ yellowScore, blackScore, frame }) => (
   <Container>
+    <Framebox>
+      <h2>Frame</h2>
+      <Box>{frame}</Box>
+    </Framebox>
     <StyledScoreboard>
       <Scorebox>
         <Box>{yellowScore}</Box>
@@ -11,10 +17,6 @@ const Scoreboard = ({ yellowScore, blackScore, frame }) => (
         <Box>{blackScore}</Box>
       </Scorebox>
     </StyledScoreboard>
-    <Framebox>
-      <h2>Frame</h2>
-      <Box>{frame}</Box>
-    </Framebox>
   </Container>
 )
 
@@ -22,14 +24,17 @@ export default Scoreboard
 
 const Container = styled.div`
   bottom: 0;
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  gap: 8px;
   left: 0;
-  padding: 16px;
+  padding: 0;
   pointer-events: none;
   position: absolute;
-  right: 0;
   user-select: none;
+
+  @media (min-width: 900px) {
+    padding: 8px;
+  }
 `
 
 const StyledScoreboard = styled.div`
@@ -61,8 +66,8 @@ const Box = styled.span`
   font-size: 24px;
   font-weight: bold;
   justify-content: center;
-  min-width: 50px;
-  min-height: 50px;
+  width: ${BOX_WIDTH};
+  height: ${BOX_WIDTH};
   padding: 8px;
 `
 
@@ -70,9 +75,10 @@ const Framebox = styled.span`
   h2 {
     background-color: black;
     color: white;
-    font-size: 12px;
+    font-size: 10px;
     font-weight: bold;
-    padding: 4px;
+    padding: 4px 4px 2px;
+    width: ${BOX_WIDTH};
     letter-spacing: 0.1px;
     text-align: center;
     text-transform: uppercase;

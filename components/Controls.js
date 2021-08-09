@@ -12,6 +12,7 @@ const Controls = ({
   handleToggleActiveColor,
   handleSetScore,
   handleToggleScoreboard,
+  handleClearScore,
   isYellow,
   visibleNumbers,
   score,
@@ -93,6 +94,9 @@ const Controls = ({
                 />
               </label>
             </Form>
+            <Button variant="outlined" size="large" fullWidth onClick={handleClearScore}>
+              Clear Score
+            </Button>
             <SwitchContainer>
               <span>Show Scoreboard</span>
               <BiscuitSwitch
