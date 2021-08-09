@@ -13,6 +13,22 @@ const PageHead = ({ title }) => (
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-title" content="shuff.app" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon-iphone-60x60.png" />
+    <link
+      rel="apple-touch-icon"
+      sizes="60x60"
+      href="/icons/apple-touch-icon-ipad-76x76.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="114x114"
+      href="/icons/apple-touch-icon-iphone-retina-120x120.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="144x144"
+      href="/icons/apple-touch-icon-ipad-retina-152x152.png"
+    />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"
