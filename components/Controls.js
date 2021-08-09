@@ -1,25 +1,31 @@
 import { useState } from 'react'
 import styled from 'styled-components'
-import { Button, Drawer, Switch, TextField } from '@material-ui/core'
+import { makeStyles, Button, Drawer, Switch, TextField } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
 import { Colophon } from './'
 import { biscuitColor } from '../tokens'
 
+const useStyles = makeStyles({
+  paper: {
+    width: 360,
+    maxWidth: '100%',
+  },
+})
+
 const Controls = ({
-  handleAddBiscuit,
+  handleAddYellowBiscuit,
+  handleAddBlackBiscuit,
   handleClearBoard,
   handleToggleNumbers,
-  handleToggleActiveColor,
   handleSetScore,
   handleToggleScoreboard,
   handleClearScore,
-  isYellow,
   visibleNumbers,
   score,
   visibleScoreboard,
 }) => {
   const [menuIsExpanded, setMenuIsExpanded] = useState(false)
-
+  const classes = useStyles()
   const toggleDrawer = (isOpen) => setMenuIsExpanded(isOpen)
 
   return (
@@ -27,25 +33,48 @@ const Controls = ({
       <ControlsToggle onClick={() => toggleDrawer(true)}>
         <span>&#9776;</span>
       </ControlsToggle>
-      <Drawer anchor="right" open={menuIsExpanded} onClose={() => toggleDrawer(false)}>
+      <Drawer
+        anchor="right"
+        open={menuIsExpanded}
+        onClose={() => toggleDrawer(false)}
+        classes={{ paper: classes.paper }}
+      >
         <ControlsContainer>
           <CloseButton onClick={() => setMenuIsExpanded(false)}>
             &times; <span>Close</span>
           </CloseButton>
           <ControlsGroup>
-            <SwitchContainer>
-              <span>Yellow</span>
-              <BiscuitSwitch checked={!isYellow} onChange={handleToggleActiveColor} />
-              <span>Black</span>
-            </SwitchContainer>
-            <Button variant="contained" size="large" fullWidth onClick={handleAddBiscuit}>
-              Add Biscuit
+            <Button
+              variant="contained"
+              size="large"
+              fullWidth
+              onClick={handleAddYellowBiscuit}
+              style={{
+                backgroundColor: biscuitColor.light,
+                color: 'black',
+                fontWeight: 'bold',
+              }}
+            >
+              Add Yellow Biscuit
+            </Button>
+            <Button
+              variant="contained"
+              size="large"
+              fullWidth
+              onClick={handleAddBlackBiscuit}
+              style={{
+                backgroundColor: biscuitColor.dark,
+                color: 'white',
+                fontWeight: 'bold',
+              }}
+            >
+              Add Black Biscuit
             </Button>
             <Button variant="outlined" size="large" fullWidth onClick={handleClearBoard}>
               Clear Court
             </Button>
             <SwitchContainer>
-              <span>Toggle Biscuit Numbers</span>
+              <span>Toggle Numbers</span>
               <BiscuitSwitch checked={visibleNumbers} onChange={handleToggleNumbers} />
             </SwitchContainer>
           </ControlsGroup>
@@ -98,7 +127,7 @@ const Controls = ({
               Clear Score
             </Button>
             <SwitchContainer>
-              <span>Show Scoreboard</span>
+              <span>Toggle Scoreboard</span>
               <BiscuitSwitch
                 checked={visibleScoreboard}
                 onChange={handleToggleScoreboard}

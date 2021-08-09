@@ -17,7 +17,6 @@ const initialScore = {
 }
 
 const Home = () => {
-  const [isYellow, setIsYellow] = useState(true)
   const [biscuits, setBiscuits] = useState(initialBiscuits)
   const [score, setScore] = useState(initialScore)
   const [visibleNumbers, setVisibleNumbers] = useState(false)
@@ -36,7 +35,6 @@ const Home = () => {
         <Main>
           <PlayArea
             biscuits={biscuits}
-            isYellow={isYellow}
             setBiscuits={setBiscuits}
             visibleNumbers={visibleNumbers}
           >
@@ -49,14 +47,13 @@ const Home = () => {
             )}
           </PlayArea>
           <Controls
-            isYellow={isYellow}
             visibleNumbers={visibleNumbers}
             visibleScoreboard={visibleScoreboard}
             score={score}
-            handleAddBiscuit={() => addBiscuit(isYellow, biscuits, setBiscuits)}
+            handleAddYellowBiscuit={() => addBiscuit(true, biscuits, setBiscuits)}
+            handleAddBlackBiscuit={() => addBiscuit(false, biscuits, setBiscuits)}
             handleClearBoard={() => setBiscuits(initialBiscuits)}
             handleToggleNumbers={() => setVisibleNumbers(!visibleNumbers)}
-            handleToggleActiveColor={() => setIsYellow(!isYellow)}
             handleSetScore={(score) => setScore(score)}
             handleToggleScoreboard={() => setVisibleScoreboard(!visibleScoreboard)}
             handleClearScore={() => setScore(initialScore)}

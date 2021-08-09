@@ -13,8 +13,6 @@ const Biscuit = ({ color, biscuitNumber, biscuits, setBiscuits, visibleNumbers }
       ? (newBiscuitsArray.yellow[biscuitNumber] = updatedCoords)
       : (newBiscuitsArray.black[biscuitNumber] = updatedCoords)
 
-    console.log('handleDrag')
-
     setBiscuits(newBiscuitsArray)
   }
 
