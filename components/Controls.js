@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import styled from 'styled-components'
-import { Button, Drawer, Switch } from '@material-ui/core'
+import { Button, Drawer, Switch, TextField } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
 import { Colophon } from './'
 import { biscuitColor } from '../tokens'
@@ -10,8 +10,12 @@ const Controls = ({
   handleClearBoard,
   handleToggleNumbers,
   handleToggleActiveColor,
+  handleSetScore,
+  handleToggleScoreboard,
   isYellow,
   visibleNumbers,
+  score,
+  visibleScoreboard,
 }) => {
   const [menuIsExpanded, setMenuIsExpanded] = useState(false)
 
@@ -37,13 +41,66 @@ const Controls = ({
               Add Biscuit
             </Button>
             <Button variant="outlined" size="large" fullWidth onClick={handleClearBoard}>
-              Clear Board
+              Clear Court
             </Button>
+            <SwitchContainer>
+              <span>Toggle Biscuit Numbers</span>
+              <BiscuitSwitch checked={visibleNumbers} onChange={handleToggleNumbers} />
+            </SwitchContainer>
           </ControlsGroup>
-          <SwitchContainer>
-            <span>Toggle Numbers</span>
-            <BiscuitSwitch checked={visibleNumbers} onChange={handleToggleNumbers} />
-          </SwitchContainer>
+          <ControlsGroup>
+            <Form noValidate autoComplete="off">
+              <label htmlFor="yellow">
+                <span>Yellow</span>
+                <input
+                  name="yellow"
+                  type="number"
+                  placeholder={score.yellow}
+                  onChange={(e) =>
+                    handleSetScore({
+                      ...score,
+                      yellow: e.target.value,
+                    })
+                  }
+                />
+              </label>
+              <label htmlFor="black">
+                <span>Black</span>
+                <input
+                  name="black"
+                  type="number"
+                  placeholder={score.black}
+                  onChange={(e) =>
+                    handleSetScore({
+                      ...score,
+                      black: e.target.value,
+                    })
+                  }
+                />
+              </label>
+              <label htmlFor="frame">
+                <span>Frame</span>
+                <input
+                  name="frame"
+                  type="number"
+                  placeholder={score.frame}
+                  onChange={(e) =>
+                    handleSetScore({
+                      ...score,
+                      frame: e.target.value,
+                    })
+                  }
+                />
+              </label>
+            </Form>
+            <SwitchContainer>
+              <span>Show Scoreboard</span>
+              <BiscuitSwitch
+                checked={visibleScoreboard}
+                onChange={handleToggleScoreboard}
+              />
+            </SwitchContainer>
+          </ControlsGroup>
           <Colophon />
         </ControlsContainer>
       </Drawer>
@@ -95,6 +152,33 @@ const ControlsGroup = styled.div`
 
   & > *:not(:last-child) {
     margin-bottom: 16px;
+  }
+`
+
+const Form = styled.form`
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(3, 1fr);
+
+  label {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+
+    span {
+      font-size: 12px;
+      font-weight: bold;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+    }
+  }
+
+  input {
+    font-size: 24px;
+    font-weight: bold;
+    max-width: 60px;
+    min-height: 40px;
+    padding: 8px;
   }
 `
 

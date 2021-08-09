@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { Biscuit, Court } from './'
 import { biscuitColor } from '../tokens'
 
-const PlayArea = ({ biscuits, isYellow, setBiscuits, visibleNumbers }) => {
+const PlayArea = ({ biscuits, isYellow, setBiscuits, visibleNumbers, children }) => {
   return (
     <StyledPlayArea className="play-area">
       {biscuits.yellow.map((biscuit, i) => (
@@ -28,6 +28,7 @@ const PlayArea = ({ biscuits, isYellow, setBiscuits, visibleNumbers }) => {
         />
       ))}
       <Court stroke="black" />
+      {children}
     </StyledPlayArea>
   )
 }
