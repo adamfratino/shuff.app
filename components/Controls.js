@@ -11,6 +11,7 @@ const Controls = ({
   handleToggleNumbers,
   handleToggleActiveColor,
   isYellow,
+  visibleNumbers,
 }) => {
   const [menuIsExpanded, setMenuIsExpanded] = useState(false)
 
@@ -23,25 +24,23 @@ const Controls = ({
       </ControlsToggle>
       <Drawer anchor="right" open={menuIsExpanded} onClose={() => toggleDrawer(false)}>
         <ControlsContainer>
+          <ControlsGroup>
+            <SwitchContainer>
+              <span>Yellow</span>
+              <BiscuitSwitch checked={!isYellow} onChange={handleToggleActiveColor} />
+              <span>Black</span>
+            </SwitchContainer>
+            <Button variant="contained" size="large" fullWidth onClick={handleAddBiscuit}>
+              Add Biscuit
+            </Button>
+            <Button variant="outlined" size="large" fullWidth onClick={handleClearBoard}>
+              Clear Board
+            </Button>
+          </ControlsGroup>
           <SwitchContainer>
-            <span>Yellow</span>
-            <BiscuitSwitch checked={!isYellow} onChange={handleToggleActiveColor} />
-            <span>Black</span>
+            <span>Toggle Numbers</span>
+            <BiscuitSwitch checked={visibleNumbers} onChange={handleToggleNumbers} />
           </SwitchContainer>
-          <Button variant="contained" size="large" fullWidth onClick={handleAddBiscuit}>
-            Add Biscuit
-          </Button>
-          <Button
-            variant="contained"
-            size="large"
-            fullWidth
-            onClick={handleToggleNumbers}
-          >
-            Toggle Numbers
-          </Button>
-          <Button variant="outlined" size="large" fullWidth onClick={handleClearBoard}>
-            Clear Board
-          </Button>
           <Colophon />
         </ControlsContainer>
       </Drawer>
@@ -67,6 +66,17 @@ const BiscuitSwitch = withStyles({
     height: 24,
   },
 })(Switch)
+
+const ControlsGroup = styled.div`
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 16px;
+  text-align: center;
+
+  & > *:not(:last-child) {
+    margin-bottom: 16px;
+  }
+`
 
 const ControlsToggle = styled.span`
   align-items: center;
