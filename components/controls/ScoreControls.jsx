@@ -5,9 +5,7 @@ import { biscuitColor } from '../../tokens'
 
 const ScoreControls = ({
   score,
-  visibleFrame,
-  visibleShot,
-  visibleScore,
+  visibleScoreDetails,
   yellowHammer,
   handleSetScore,
   handleClearScore,
@@ -23,9 +21,21 @@ const ScoreControls = ({
       <Input name="yellow" score={score} handleSetScore={handleSetScore} />
       <Input name="black" score={score} handleSetScore={handleSetScore} />
     </Form>
-    <Toggle label="Show Frame" checked={visibleFrame} onChange={handleVisibleFrame} />
-    <Toggle label="Show Shot" checked={visibleShot} onChange={handleVisibleShot} />
-    <Toggle label="Show Score" checked={visibleScore} onChange={handleVisibleScore} />
+    <Toggle
+      label="Show Frame"
+      checked={visibleScoreDetails.frame}
+      onChange={handleVisibleFrame}
+    />
+    <Toggle
+      label="Show Shot"
+      checked={visibleScoreDetails.shot}
+      onChange={handleVisibleShot}
+    />
+    <Toggle
+      label="Show Score"
+      checked={visibleScoreDetails.score}
+      onChange={handleVisibleScore}
+    />
     <Toggle label="Hammer Color" checked={!yellowHammer} onChange={handleYellowHammer} />
     <Button variant="contained" size="large" fullWidth onClick={handleClearScore}>
       Clear Score

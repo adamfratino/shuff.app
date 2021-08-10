@@ -1,8 +1,7 @@
 import { useState } from 'react'
 import styled from 'styled-components'
 import { makeStyles, Drawer } from '@material-ui/core'
-import { Colophon } from '.'
-import { TopBar, BoardControls, ScoreControls } from './controls'
+import { TopBar, BoardControls, ScoreControls, Colophon } from './controls'
 import { biscuitColor } from '../tokens'
 
 const useStyles = makeStyles({
@@ -16,7 +15,7 @@ const useStyles = makeStyles({
 const Controls = ({
   biscuits,
   yellowHammer,
-  visibleFrame,
+  visibleScoreDetails,
   handleVisibleFrame,
   handleYellowHammer,
   handleAddYellowBiscuit,
@@ -28,8 +27,6 @@ const Controls = ({
   handleClearScore,
   visibleNumbers,
   score,
-  visibleScore,
-  visibleShot,
   handleVisibleShot,
 }) => {
   const [menuIsExpanded, setMenuIsExpanded] = useState(false)
@@ -62,9 +59,7 @@ const Controls = ({
           <ControlsGroup>
             <ScoreControls
               score={score}
-              visibleFrame={visibleFrame}
-              visibleShot={visibleShot}
-              visibleScore={visibleScore}
+              visibleScoreDetails={visibleScoreDetails}
               yellowHammer={yellowHammer}
               handleSetScore={handleSetScore}
               handleClearScore={handleClearScore}

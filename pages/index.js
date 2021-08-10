@@ -1,15 +1,16 @@
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
-import { createGlobalStyle, ThemeProvider } from 'styled-components'
-import { Navigation, Main, PageHead, PlayArea, Scoreboard } from '../components'
+import { ThemeProvider } from 'styled-components'
+import {
+  GlobalStyle,
+  Navigation,
+  Main,
+  PageHead,
+  PlayArea,
+  Scoreboard,
+} from '../components'
 import { addBiscuit, updateUrlParams } from '../utils'
 import { defaultTheme } from '../themes'
-
-const GlobalStyle = createGlobalStyle`
-  body {
-    background-color: ${defaultTheme.borderColor};
-  }
-`
 
 const initialBiscuits = {
   yellow: [],
@@ -23,14 +24,18 @@ const initialScore = {
   shot: 1,
 }
 
+const initialScoreDetails = {
+  frame: false,
+  shot: false,
+  score: false,
+}
+
 const Home = () => {
   const [biscuits, setBiscuits] = useState(initialBiscuits)
   const [yellowHammer, setYellowHammer] = useState(true)
   const [score, setScore] = useState(initialScore)
   const [visibleNumbers, setVisibleNumbers] = useState(false)
-  const [visibleScore, setVisibleScore] = useState(false)
-  const [visibleFrame, setVisibleFrame] = useState(false)
-  const [visibleShot, setVisibleShot] = useState(false)
+  const [visibleScoreDetails, setVisibleScoreDetails] = useState(initialScoreDetails)
   const [theme, setTheme] = useState(defaultTheme)
   const router = useRouter()
 
@@ -54,28 +59,40 @@ const Home = () => {
               yellowScore={score.yellow}
               blackScore={score.black}
               frame={score.frame}
-              visibleFrame={visibleFrame}
-              visibleScore={visibleScore}
-              visibleShot={visibleShot}
+              shot={score.shot}
+              visibleScoreDetails={visibleScoreDetails}
             />
           </PlayArea>
           <Navigation
             biscuits={biscuits}
             yellowHammer={yellowHammer}
             visibleNumbers={visibleNumbers}
-            visibleScore={visibleScore}
             score={score}
-            visibleFrame={visibleFrame}
-            visibleShot={visibleShot}
-            handleVisibleShot={() => setVisibleShot(!visibleShot)}
-            handleVisibleFrame={() => setVisibleFrame(!visibleFrame)}
+            visibleScoreDetails={visibleScoreDetails}
+            handleVisibleFrame={() =>
+              setVisibleScoreDetails({
+                ...visibleScoreDetails,
+                frame: !visibleScoreDetails.frame,
+              })
+            }
+            handleVisibleShot={() =>
+              setVisibleScoreDetails({
+                ...visibleScoreDetails,
+                shot: !visibleScoreDetails.shot,
+              })
+            }
+            handleVisibleScore={() =>
+              setVisibleScoreDetails({
+                ...visibleScoreDetails,
+                score: !visibleScoreDetails.score,
+              })
+            }
             handleYellowHammer={() => setYellowHammer(!yellowHammer)}
             handleAddYellowBiscuit={() => addBiscuit(true, biscuits, setBiscuits)}
             handleAddBlackBiscuit={() => addBiscuit(false, biscuits, setBiscuits)}
             handleClearBoard={() => setBiscuits(initialBiscuits)}
             handleToggleNumbers={() => setVisibleNumbers(!visibleNumbers)}
             handleSetScore={(score) => setScore(score)}
-            handleVisibleScore={() => setVisibleScore(!visibleScore)}
             handleClearScore={() => setScore(initialScore)}
           />
         </Main>

@@ -9,27 +9,26 @@ const Scoreboard = ({
   yellowScore,
   blackScore,
   frame,
+  shot,
   yellowHammer,
-  visibleFrame,
-  visibleScore,
-  visibleShot,
+  visibleScoreDetails,
 }) => (
   <Container>
     <StyledFrameboard>
-      {visibleFrame && (
+      {visibleScoreDetails.frame && (
         <Framebox>
           <h2>Frame</h2>
           <Box>{frame}</Box>
         </Framebox>
       )}
-      {visibleShot && (
+      {visibleScoreDetails.shot && (
         <Framebox>
           <h2>Shot</h2>
-          <Box>{frame}</Box>
+          <Box>{shot}</Box>
         </Framebox>
       )}
     </StyledFrameboard>
-    {visibleScore && (
+    {visibleScoreDetails.score && (
       <StyledScoreboard>
         <Scorebox className="is-yellow">
           <Box>{yellowScore}</Box>
