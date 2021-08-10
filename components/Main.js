@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { lightBlue } from '@material-ui/core/colors'
 
 const Main = ({ children }) => <StyledMain role="main">{children}</StyledMain>
 

@@ -1,6 +1,7 @@
 import { useState } from 'react'
-import styled from 'styled-components'
-import { makeStyles, Button, Drawer, Switch, TextField } from '@material-ui/core'
+import { darken } from 'polished'
+import styled, { css } from 'styled-components'
+import { makeStyles, Button, Drawer, Switch } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
 import { Colophon } from './'
 import { biscuitColor } from '../tokens'
@@ -13,6 +14,7 @@ const useStyles = makeStyles({
 })
 
 const Controls = ({
+  biscuits,
   handleAddYellowBiscuit,
   handleAddBlackBiscuit,
   handleClearBoard,
@@ -25,8 +27,8 @@ const Controls = ({
   visibleScoreboard,
 }) => {
   const [menuIsExpanded, setMenuIsExpanded] = useState(false)
-  const classes = useStyles()
   const toggleDrawer = (isOpen) => setMenuIsExpanded(isOpen)
+  const classes = useStyles()
 
   return (
     <>
@@ -40,9 +42,7 @@ const Controls = ({
         classes={{ paper: classes.paper }}
       >
         <ControlsContainer>
-          <CloseButton onClick={() => setMenuIsExpanded(false)}>
-            &times; <span>Close</span>
-          </CloseButton>
+          <CloseButton onClick={() => setMenuIsExpanded(false)}>&times;</CloseButton>
           <ControlsGroup>
             <Button
               variant="contained"
@@ -53,10 +53,12 @@ const Controls = ({
                 backgroundColor: biscuitColor.light,
                 color: 'black',
                 fontWeight: 'bold',
+                marginBottom: `8px`,
               }}
             >
               Add Yellow Biscuit
             </Button>
+            <ButtonCount>{biscuits.yellow.length}</ButtonCount>
             <Button
               variant="contained"
               size="large"
@@ -66,10 +68,12 @@ const Controls = ({
                 backgroundColor: biscuitColor.dark,
                 color: 'white',
                 fontWeight: 'bold',
+                marginBottom: `8px`,
               }}
             >
               Add Black Biscuit
             </Button>
+            <ButtonCount>{biscuits.black.length}</ButtonCount>
             <Button variant="outlined" size="large" fullWidth onClick={handleClearBoard}>
               Clear Court
             </Button>
@@ -80,48 +84,9 @@ const Controls = ({
           </ControlsGroup>
           <ControlsGroup>
             <Form noValidate autoComplete="off">
-              <label htmlFor="yellow">
-                <span>Yellow</span>
-                <input
-                  name="yellow"
-                  type="number"
-                  placeholder={score.yellow}
-                  onChange={(e) =>
-                    handleSetScore({
-                      ...score,
-                      yellow: e.target.value,
-                    })
-                  }
-                />
-              </label>
-              <label htmlFor="black">
-                <span>Black</span>
-                <input
-                  name="black"
-                  type="number"
-                  placeholder={score.black}
-                  onChange={(e) =>
-                    handleSetScore({
-                      ...score,
-                      black: e.target.value,
-                    })
-                  }
-                />
-              </label>
-              <label htmlFor="frame">
-                <span>Frame</span>
-                <input
-                  name="frame"
-                  type="number"
-                  placeholder={score.frame}
-                  onChange={(e) =>
-                    handleSetScore({
-                      ...score,
-                      frame: e.target.value,
-                    })
-                  }
-                />
-              </label>
+              <Input name="yellow" score={score} handleSetScore={handleSetScore} />
+              <Input name="black" score={score} handleSetScore={handleSetScore} />
+              <Input name="frame" score={score} handleSetScore={handleSetScore} />
             </Form>
             <Button variant="outlined" size="large" fullWidth onClick={handleClearScore}>
               Clear Score
@@ -141,7 +106,31 @@ const Controls = ({
   )
 }
 
+const Input = ({ name, score, handleSetScore }) => (
+  <label htmlFor={name}>
+    <span>{name}</span>
+    <input
+      name={name}
+      inputMode="numeric"
+      pattern="[0-9]*"
+      placeholder={score[name]}
+      onChange={(e) =>
+        handleSetScore({
+          ...score,
+          [name]: e.target.value,
+        })
+      }
+    />
+  </label>
+)
+
 export default Controls
+
+const labelStyles = css`
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+`
 
 const BiscuitSwitch = withStyles({
   switchBase: {
@@ -153,6 +142,10 @@ const BiscuitSwitch = withStyles({
   checked: {},
   track: {
     height: 18,
+    '$checked$checked + &': {
+      opacity: 1.0,
+      backgroundColor: darken(0.1, biscuitColor.light),
+    },
   },
   thumb: {
     width: 24,
@@ -164,16 +157,29 @@ const CloseButton = styled.button`
   align-self: flex-end;
   appearance: none;
   border: none;
-  background-color: transparent;
+  border-radius: 4px;
+  background-color: black;
+  color: white;
   cursor: pointer;
   display: inline-flex;
-  font-weight: bold;
-  text-transform: uppercase;
+  padding: 8px;
 
   span {
+    ${labelStyles};
     display: inline-block;
-    font-size: 12px;
     margin-left: 4px;
+  }
+`
+
+const ButtonCount = styled.span`
+  ${labelStyles};
+  display: block;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+
+  &::before {
+    content: 'Count:';
+    margin-right: 4px;
   }
 `
 
@@ -199,10 +205,8 @@ const Form = styled.form`
     flex-direction: column;
 
     span {
-      font-size: 12px;
-      font-weight: bold;
+      ${labelStyles};
       margin-bottom: 4px;
-      text-transform: uppercase;
     }
   }
 
@@ -212,6 +216,7 @@ const Form = styled.form`
     max-width: 60px;
     min-height: 40px;
     padding: 8px;
+    text-align: center;
   }
 `
 

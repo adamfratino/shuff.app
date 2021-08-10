@@ -1,9 +1,15 @@
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
-import { ThemeProvider } from 'styled-components'
+import { createGlobalStyle, ThemeProvider } from 'styled-components'
 import { Controls, Main, PageHead, PlayArea, Scoreboard } from '../components'
 import { addBiscuit, updateUrlParams } from '../utils'
 import { defaultTheme } from '../themes'
+
+const GlobalStyle = createGlobalStyle`
+  body {
+    background-color: ${defaultTheme.borderColor};
+  }
+`
 
 const initialBiscuits = {
   yellow: [],
@@ -31,6 +37,7 @@ const Home = () => {
   return (
     <>
       <PageHead title="Shuffleboard Visualizer" />
+      <GlobalStyle />
       <ThemeProvider theme={theme}>
         <Main>
           <PlayArea
@@ -47,6 +54,7 @@ const Home = () => {
             )}
           </PlayArea>
           <Controls
+            biscuits={biscuits}
             visibleNumbers={visibleNumbers}
             visibleScoreboard={visibleScoreboard}
             score={score}
