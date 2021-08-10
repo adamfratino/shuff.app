@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
-import { Controls, Main, PageHead, PlayArea, Scoreboard } from '../components'
+import { Navigation, Main, PageHead, PlayArea, Scoreboard } from '../components'
 import { addBiscuit, updateUrlParams } from '../utils'
 import { defaultTheme } from '../themes'
 
@@ -59,7 +59,7 @@ const Home = () => {
               visibleShot={visibleShot}
             />
           </PlayArea>
-          <Controls
+          <Navigation
             biscuits={biscuits}
             yellowHammer={yellowHammer}
             visibleNumbers={visibleNumbers}

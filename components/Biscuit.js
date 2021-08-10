@@ -36,6 +36,7 @@ export default Biscuit
 const BiscuitContainer = styled.div`
   position: absolute;
   top: 0;
+  z-index: 2;
 
   &.is-yellow {
     left: 0;
@@ -54,11 +55,16 @@ const StyledBiscuit = styled.span`
   border-radius: 50%;
   cursor: grab;
   display: inline-flex;
+  font-size: 12px;
   font-weight: bold;
   height: var(--biscuitSize);
   justify-content: center;
   position: relative;
   width: var(--biscuitSize);
+
+  @media (min-width: 900px) {
+    font-size: 16px;
+  }
 
   &:active {
     background-color: ${(props) => darken(0.05, props.color)};
