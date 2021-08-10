@@ -24,9 +24,11 @@ const initialScore = {
 
 const Home = () => {
   const [biscuits, setBiscuits] = useState(initialBiscuits)
+  const [yellowHammer, setYellowHammer] = useState(true)
   const [score, setScore] = useState(initialScore)
   const [visibleNumbers, setVisibleNumbers] = useState(false)
   const [visibleScoreboard, setVisibleScoreboard] = useState(false)
+  const [visibleFrameboard, setVisibleFrameboard] = useState(false)
   const [theme, setTheme] = useState(defaultTheme)
   const router = useRouter()
 
@@ -45,19 +47,24 @@ const Home = () => {
             setBiscuits={setBiscuits}
             visibleNumbers={visibleNumbers}
           >
-            {visibleScoreboard && (
-              <Scoreboard
-                yellowScore={score.yellow}
-                blackScore={score.black}
-                frame={score.frame}
-              />
-            )}
+            <Scoreboard
+              yellowHammer={yellowHammer}
+              yellowScore={score.yellow}
+              blackScore={score.black}
+              frame={score.frame}
+              visibleFrameboard={visibleFrameboard}
+              visibleScoreboard={visibleScoreboard}
+            />
           </PlayArea>
           <Controls
             biscuits={biscuits}
+            yellowHammer={yellowHammer}
             visibleNumbers={visibleNumbers}
             visibleScoreboard={visibleScoreboard}
             score={score}
+            visibleFrameboard={visibleFrameboard}
+            handleVisibleFrameboard={() => setVisibleFrameboard(!visibleFrameboard)}
+            handleYellowHammer={() => setYellowHammer(!yellowHammer)}
             handleAddYellowBiscuit={() => addBiscuit(true, biscuits, setBiscuits)}
             handleAddBlackBiscuit={() => addBiscuit(false, biscuits, setBiscuits)}
             handleClearBoard={() => setBiscuits(initialBiscuits)}

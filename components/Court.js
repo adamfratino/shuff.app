@@ -140,6 +140,7 @@ export default Court
 
 const CourtSvg = styled.svg`
   /* overflow: visible; */
+  pointer-events: none;
   height: 100%;
 
   * {

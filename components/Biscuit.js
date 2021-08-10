@@ -18,7 +18,9 @@ const Biscuit = ({ color, biscuitNumber, biscuits, setBiscuits, visibleNumbers }
 
   return (
     <Draggable axis="both" bounds="parent" onStop={handleDrag}>
-      <BiscuitContainer>
+      <BiscuitContainer
+        className={color === biscuitColor.light ? 'is-yellow' : 'is-black'}
+      >
         <StyledBiscuit color={color}>
           <span className={`biscuit-number ${visibleNumbers ? 'is-visible' : ''}`}>
             {biscuitNumber + 1}
@@ -32,9 +34,16 @@ const Biscuit = ({ color, biscuitNumber, biscuits, setBiscuits, visibleNumbers }
 export default Biscuit
 
 const BiscuitContainer = styled.div`
-  left: 0;
   position: absolute;
   top: 0;
+
+  &.is-yellow {
+    left: 0;
+  }
+
+  &.is-black {
+    right: 0;
+  }
 `
 
 const StyledBiscuit = styled.span`

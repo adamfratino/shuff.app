@@ -1,22 +1,37 @@
 import styled from 'styled-components'
 import { biscuitColor } from '../tokens'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faHammer } from '@fortawesome/free-solid-svg-icons'
 
 const BOX_WIDTH = `48px`
 
-const Scoreboard = ({ yellowScore, blackScore, frame }) => (
+const Scoreboard = ({
+  yellowScore,
+  blackScore,
+  frame,
+  yellowHammer,
+  visibleFrameboard,
+  visibleScoreboard,
+}) => (
   <Container>
-    <Framebox>
-      <h2>Frame</h2>
-      <Box>{frame}</Box>
-    </Framebox>
-    <StyledScoreboard>
-      <Scorebox>
-        <Box>{yellowScore}</Box>
-      </Scorebox>
-      <Scorebox inverted>
-        <Box>{blackScore}</Box>
-      </Scorebox>
-    </StyledScoreboard>
+    {visibleFrameboard && (
+      <Framebox>
+        <h2>Frame</h2>
+        <Box>{frame}</Box>
+      </Framebox>
+    )}
+    {visibleScoreboard && (
+      <StyledScoreboard>
+        <Scorebox className="is-yellow">
+          <Box>{yellowScore}</Box>
+          {yellowHammer && <HammerIcon icon={faHammer} />}
+        </Scorebox>
+        <Scorebox className="is-black" inverted>
+          <Box>{blackScore}</Box>
+          {!yellowHammer && <HammerIcon icon={faHammer} />}
+        </Scorebox>
+      </StyledScoreboard>
+    )}
   </Container>
 )
 
@@ -49,12 +64,13 @@ const Scorebox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  position: relative;
 
-  &:first-child > * {
+  &.is-yellow > * {
     background-color: ${biscuitColor.light};
   }
 
-  &:last-child > * {
+  &.is-black > * {
     background-color: ${biscuitColor.dark};
   }
 `
@@ -69,6 +85,27 @@ const Box = styled.span`
   width: ${BOX_WIDTH};
   height: ${BOX_WIDTH};
   padding: 8px;
+`
+
+const HammerIcon = styled(FontAwesomeIcon)`
+  background-color: white !important;
+  border: 2px solid black;
+  border-radius: 50%;
+  color: black;
+  box-sizing: content-box;
+  height: 12px;
+  padding: 4px;
+  position: absolute;
+  top: -10px;
+  width: 12px;
+
+  .is-yellow & {
+    left: -8px;
+  }
+
+  .is-black & {
+    right: -8px;
+  }
 `
 
 const Framebox = styled.span`

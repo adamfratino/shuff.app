@@ -15,6 +15,10 @@ const useStyles = makeStyles({
 
 const Controls = ({
   biscuits,
+  yellowHammer,
+  visibleFrameboard,
+  handleVisibleFrameboard,
+  handleYellowHammer,
   handleAddYellowBiscuit,
   handleAddBlackBiscuit,
   handleClearBoard,
@@ -80,7 +84,7 @@ const Controls = ({
               Clear Court
             </Button>
             <SwitchContainer>
-              <span>Toggle Numbers</span>
+              <span>Show Numbers</span>
               <BiscuitSwitch checked={visibleNumbers} onChange={handleToggleNumbers} />
             </SwitchContainer>
           </ControlsGroup>
@@ -94,11 +98,22 @@ const Controls = ({
               Clear Score
             </Button>
             <SwitchContainer>
-              <span>Toggle Scoreboard</span>
+              <span>Show Score</span>
               <BiscuitSwitch
                 checked={visibleScoreboard}
                 onChange={handleToggleScoreboard}
               />
+            </SwitchContainer>
+            <SwitchContainer>
+              <span>Show Frame</span>
+              <BiscuitSwitch
+                checked={visibleFrameboard}
+                onChange={handleVisibleFrameboard}
+              />
+            </SwitchContainer>
+            <SwitchContainer>
+              <span>Hammer Color</span>
+              <BiscuitSwitch checked={!yellowHammer} onChange={handleYellowHammer} />
             </SwitchContainer>
           </ControlsGroup>
           <Colophon />
@@ -267,9 +282,8 @@ const ControlsToggle = styled.span`
 const SwitchContainer = styled.div`
   align-items: center;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   text-transform: uppercase;
-  padding: 0 16px;
 `
 
 const ControlsContainer = styled.div`

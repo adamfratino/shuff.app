@@ -17,6 +17,7 @@ const StyledColophon = styled.span`
   margin-top: auto;
   text-align: center;
   text-transform: uppercase;
+  padding: 16px 0;
 
   span {
     color: tomato;
