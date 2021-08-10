@@ -10,17 +10,26 @@ const Scoreboard = ({
   blackScore,
   frame,
   yellowHammer,
-  visibleFrameboard,
-  visibleScoreboard,
+  visibleFrame,
+  visibleScore,
+  visibleShot,
 }) => (
   <Container>
-    {visibleFrameboard && (
-      <Framebox>
-        <h2>Frame</h2>
-        <Box>{frame}</Box>
-      </Framebox>
-    )}
-    {visibleScoreboard && (
+    <StyledFrameboard>
+      {visibleFrame && (
+        <Framebox>
+          <h2>Frame</h2>
+          <Box>{frame}</Box>
+        </Framebox>
+      )}
+      {visibleShot && (
+        <Framebox>
+          <h2>Shot</h2>
+          <Box>{frame}</Box>
+        </Framebox>
+      )}
+    </StyledFrameboard>
+    {visibleScore && (
       <StyledScoreboard>
         <Scorebox className="is-yellow">
           <Box>{yellowScore}</Box>
@@ -57,6 +66,8 @@ const StyledScoreboard = styled.div`
   grid-template-columns: repeat(2, 1fr);
   gap: 8px;
 `
+
+const StyledFrameboard = styled(StyledScoreboard)``
 
 const Scorebox = styled.div`
   align-items: center;

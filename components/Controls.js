@@ -10,25 +10,28 @@ const useStyles = makeStyles({
   paper: {
     width: 360,
     maxWidth: '100%',
+    backgroundColor: `rgba(255, 255, 255, 0.75)`,
   },
 })
 
 const Controls = ({
   biscuits,
   yellowHammer,
-  visibleFrameboard,
-  handleVisibleFrameboard,
+  visibleFrame,
+  handleVisibleFrame,
   handleYellowHammer,
   handleAddYellowBiscuit,
   handleAddBlackBiscuit,
   handleClearBoard,
   handleToggleNumbers,
   handleSetScore,
-  handleToggleScoreboard,
+  handleVisibleScore,
   handleClearScore,
   visibleNumbers,
   score,
-  visibleScoreboard,
+  visibleScore,
+  visibleShot,
+  handleVisibleShot,
 }) => {
   const [menuIsExpanded, setMenuIsExpanded] = useState(false)
   const toggleDrawer = (isOpen) => setMenuIsExpanded(isOpen)
@@ -45,10 +48,14 @@ const Controls = ({
         onClose={() => toggleDrawer(false)}
         classes={{ paper: classes.paper }}
       >
-        <ControlsContainer>
+        <TopBar>
+          <Title>💰 Big Money Visualizer</Title>
           <CloseButton onClick={() => setMenuIsExpanded(false)}>
-            &times; <span>Close</span>
+            &times;
+            {/* <span>Close</span> */}
           </CloseButton>
+        </TopBar>
+        <ControlsContainer>
           <ControlsGroup>
             <Button
               variant="contained"
@@ -58,6 +65,7 @@ const Controls = ({
               style={{
                 backgroundColor: biscuitColor.light,
                 color: 'black',
+                fontFamily: 'Roboto',
                 fontWeight: 'bold',
                 marginBottom: `8px`,
               }}
@@ -90,31 +98,34 @@ const Controls = ({
           </ControlsGroup>
           <ControlsGroup>
             <Form noValidate autoComplete="off">
+              <Input name="frame" score={score} handleSetScore={handleSetScore} />
+              <Input name="shot" score={score} handleSetScore={handleSetScore} />
               <Input name="yellow" score={score} handleSetScore={handleSetScore} />
               <Input name="black" score={score} handleSetScore={handleSetScore} />
-              <Input name="frame" score={score} handleSetScore={handleSetScore} />
             </Form>
             <Button variant="contained" size="large" fullWidth onClick={handleClearScore}>
               Clear Score
             </Button>
-            <SwitchContainer>
-              <span>Show Score</span>
-              <BiscuitSwitch
-                checked={visibleScoreboard}
-                onChange={handleToggleScoreboard}
-              />
-            </SwitchContainer>
-            <SwitchContainer>
-              <span>Hammer Color</span>
-              <BiscuitSwitch checked={!yellowHammer} onChange={handleYellowHammer} />
-            </SwitchContainer>
-            <SwitchContainer>
-              <span>Show Frame</span>
-              <BiscuitSwitch
-                checked={visibleFrameboard}
-                onChange={handleVisibleFrameboard}
-              />
-            </SwitchContainer>
+            <Toggle
+              label="Show Frame"
+              checked={visibleFrame}
+              onChange={handleVisibleFrame}
+            />
+            <Toggle
+              label="Show Shot"
+              checked={visibleShot}
+              onChange={handleVisibleShot}
+            />
+            <Toggle
+              label="Show Score"
+              checked={visibleScore}
+              onChange={handleVisibleScore}
+            />
+            <Toggle
+              label="Hammer Color"
+              checked={!yellowHammer}
+              onChange={handleYellowHammer}
+            />
           </ControlsGroup>
           <Colophon />
         </ControlsContainer>
@@ -124,7 +135,7 @@ const Controls = ({
 }
 
 const Input = ({ name, score, handleSetScore }) => (
-  <label htmlFor={name}>
+  <label htmlFor={name} className={`is-${name}`}>
     <span>{name}</span>
     <input
       name={name}
@@ -141,12 +152,53 @@ const Input = ({ name, score, handleSetScore }) => (
   </label>
 )
 
+const Toggle = ({ label, checked, onChange }) => (
+  <SwitchContainer>
+    <span>{label}</span>
+    <BiscuitSwitch checked={checked} onChange={onChange} />
+  </SwitchContainer>
+)
+
 export default Controls
 
 const labelStyles = css`
   font-size: 12px;
   font-weight: bold;
   text-transform: uppercase;
+`
+
+const TopBar = styled.div`
+  align-items: center;
+  background-color: black;
+  display: flex;
+  justify-content: space-between;
+  padding: 16px;
+`
+
+const Title = styled.h1`
+  font-size: 14px;
+  color: white;
+`
+
+const CloseButton = styled.button`
+  align-self: flex-end;
+  appearance: none;
+  border: none;
+  border-radius: 4px;
+  background-color: black;
+  color: white;
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 24px;
+  line-height: 16px;
+  padding: 8px;
+  z-index: 1;
+
+  span {
+    ${labelStyles};
+    display: inline-block;
+    margin-left: 4px;
+  }
 `
 
 const BiscuitSwitch = withStyles({
@@ -170,25 +222,6 @@ const BiscuitSwitch = withStyles({
   },
 })(Switch)
 
-const CloseButton = styled.button`
-  align-self: flex-end;
-  appearance: none;
-  border: none;
-  border-radius: 4px;
-  background-color: black;
-  color: white;
-  cursor: pointer;
-  display: inline-flex;
-  padding: 8px;
-  z-index: 1;
-
-  span {
-    ${labelStyles};
-    display: inline-block;
-    margin-left: 4px;
-  }
-`
-
 const ButtonCount = styled.span`
   ${labelStyles};
   display: block;
@@ -202,6 +235,7 @@ const ButtonCount = styled.span`
 `
 
 const ControlsGroup = styled.div`
+  background-color: white;
   box-shadow: 2px 2px 16px #bebebe, -2px -2px 16px #ffffff;
   border-radius: 5px;
   padding: 32px;
@@ -215,18 +249,18 @@ const ControlsGroup = styled.div`
 const Form = styled.form`
   display: grid;
   gap: 8px;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
 
   label {
     align-items: center;
     display: flex;
     flex-direction: column;
 
-    &:first-child input {
+    &.is-yellow input {
       background-color: ${biscuitColor.light};
     }
 
-    &:nth-child(2) input {
+    &.is-black input {
       background-color: ${biscuitColor.dark};
       color: white;
       ::placeholder {
@@ -284,6 +318,10 @@ const SwitchContainer = styled.div`
   display: flex;
   justify-content: space-between;
   text-transform: uppercase;
+
+  &:not(:last-child) {
+    margin-bottom: 4px !important;
+  }
 `
 
 const ControlsContainer = styled.div`

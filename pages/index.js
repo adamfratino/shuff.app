@@ -20,6 +20,7 @@ const initialScore = {
   yellow: 0,
   black: 0,
   frame: 1,
+  shot: 1,
 }
 
 const Home = () => {
@@ -27,8 +28,9 @@ const Home = () => {
   const [yellowHammer, setYellowHammer] = useState(true)
   const [score, setScore] = useState(initialScore)
   const [visibleNumbers, setVisibleNumbers] = useState(false)
-  const [visibleScoreboard, setVisibleScoreboard] = useState(false)
-  const [visibleFrameboard, setVisibleFrameboard] = useState(false)
+  const [visibleScore, setVisibleScore] = useState(false)
+  const [visibleFrame, setVisibleFrame] = useState(false)
+  const [visibleShot, setVisibleShot] = useState(false)
   const [theme, setTheme] = useState(defaultTheme)
   const router = useRouter()
 
@@ -52,25 +54,28 @@ const Home = () => {
               yellowScore={score.yellow}
               blackScore={score.black}
               frame={score.frame}
-              visibleFrameboard={visibleFrameboard}
-              visibleScoreboard={visibleScoreboard}
+              visibleFrame={visibleFrame}
+              visibleScore={visibleScore}
+              visibleShot={visibleShot}
             />
           </PlayArea>
           <Controls
             biscuits={biscuits}
             yellowHammer={yellowHammer}
             visibleNumbers={visibleNumbers}
-            visibleScoreboard={visibleScoreboard}
+            visibleScore={visibleScore}
             score={score}
-            visibleFrameboard={visibleFrameboard}
-            handleVisibleFrameboard={() => setVisibleFrameboard(!visibleFrameboard)}
+            visibleFrame={visibleFrame}
+            visibleShot={visibleShot}
+            handleVisibleShot={() => setVisibleShot(!visibleShot)}
+            handleVisibleFrame={() => setVisibleFrame(!visibleFrame)}
             handleYellowHammer={() => setYellowHammer(!yellowHammer)}
             handleAddYellowBiscuit={() => addBiscuit(true, biscuits, setBiscuits)}
             handleAddBlackBiscuit={() => addBiscuit(false, biscuits, setBiscuits)}
             handleClearBoard={() => setBiscuits(initialBiscuits)}
             handleToggleNumbers={() => setVisibleNumbers(!visibleNumbers)}
             handleSetScore={(score) => setScore(score)}
-            handleToggleScoreboard={() => setVisibleScoreboard(!visibleScoreboard)}
+            handleVisibleScore={() => setVisibleScore(!visibleScore)}
             handleClearScore={() => setScore(initialScore)}
           />
         </Main>
