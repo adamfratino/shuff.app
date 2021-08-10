@@ -42,7 +42,9 @@ const Controls = ({
         classes={{ paper: classes.paper }}
       >
         <ControlsContainer>
-          <CloseButton onClick={() => setMenuIsExpanded(false)}>&times;</CloseButton>
+          <CloseButton onClick={() => setMenuIsExpanded(false)}>
+            &times; <span>Close</span>
+          </CloseButton>
           <ControlsGroup>
             <Button
               variant="contained"
@@ -74,7 +76,7 @@ const Controls = ({
               Add Black Biscuit
             </Button>
             <ButtonCount>{biscuits.black.length}</ButtonCount>
-            <Button variant="outlined" size="large" fullWidth onClick={handleClearBoard}>
+            <Button variant="contained" size="large" fullWidth onClick={handleClearBoard}>
               Clear Court
             </Button>
             <SwitchContainer>
@@ -88,7 +90,7 @@ const Controls = ({
               <Input name="black" score={score} handleSetScore={handleSetScore} />
               <Input name="frame" score={score} handleSetScore={handleSetScore} />
             </Form>
-            <Button variant="outlined" size="large" fullWidth onClick={handleClearScore}>
+            <Button variant="contained" size="large" fullWidth onClick={handleClearScore}>
               Clear Score
             </Button>
             <SwitchContainer>
@@ -163,6 +165,7 @@ const CloseButton = styled.button`
   cursor: pointer;
   display: inline-flex;
   padding: 8px;
+  z-index: 1;
 
   span {
     ${labelStyles};
@@ -184,9 +187,9 @@ const ButtonCount = styled.span`
 `
 
 const ControlsGroup = styled.div`
-  border: 1px solid black;
+  box-shadow: 16px 16px 32px #bebebe, -16px -16px 32px #ffffff;
   border-radius: 5px;
-  padding: 16px;
+  padding: 32px;
   text-align: center;
 
   & > *:not(:last-child) {

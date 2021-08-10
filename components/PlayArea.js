@@ -42,4 +42,8 @@ const StyledPlayArea = styled.section`
   justify-content: center;
   max-width: 100%;
   position: relative;
+
+  @media (hover: none) and (pointer: coarse) {
+    border-top: 0;
+  }
 `
