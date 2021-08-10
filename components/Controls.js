@@ -105,15 +105,15 @@ const Controls = ({
               />
             </SwitchContainer>
             <SwitchContainer>
+              <span>Hammer Color</span>
+              <BiscuitSwitch checked={!yellowHammer} onChange={handleYellowHammer} />
+            </SwitchContainer>
+            <SwitchContainer>
               <span>Show Frame</span>
               <BiscuitSwitch
                 checked={visibleFrameboard}
                 onChange={handleVisibleFrameboard}
               />
-            </SwitchContainer>
-            <SwitchContainer>
-              <span>Hammer Color</span>
-              <BiscuitSwitch checked={!yellowHammer} onChange={handleYellowHammer} />
             </SwitchContainer>
           </ControlsGroup>
           <Colophon />
