@@ -187,7 +187,7 @@ const ButtonCount = styled.span`
 `
 
 const ControlsGroup = styled.div`
-  box-shadow: 16px 16px 32px #bebebe, -16px -16px 32px #ffffff;
+  box-shadow: 2px 2px 16px #bebebe, -2px -2px 16px #ffffff;
   border-radius: 5px;
   padding: 32px;
   text-align: center;
@@ -207,19 +207,40 @@ const Form = styled.form`
     display: flex;
     flex-direction: column;
 
+    &:first-child input {
+      background-color: ${biscuitColor.light};
+    }
+
+    &:nth-child(2) input {
+      background-color: ${biscuitColor.dark};
+      color: white;
+      ::placeholder {
+        color: white;
+      }
+    }
+
     span {
       ${labelStyles};
-      margin-bottom: 4px;
+      background-color: black;
+      color: white;
+      padding: 4px 4px 2px;
+      width: 100%;
     }
-  }
 
-  input {
-    font-size: 24px;
-    font-weight: bold;
-    max-width: 60px;
-    min-height: 40px;
-    padding: 8px;
-    text-align: center;
+    input {
+      border: 1px solid black;
+      border-radius: 0;
+      color: black;
+      font-size: 24px;
+      font-weight: bold;
+      min-height: 40px;
+      padding: 8px;
+      text-align: center;
+      width: 100%;
+      ::placeholder {
+        color: black;
+      }
+    }
   }
 `
 
