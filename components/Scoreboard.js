@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { biscuitColor } from '../tokens'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHammer } from '@fortawesome/free-solid-svg-icons'
+import { faHammer, faTrash } from '@fortawesome/free-solid-svg-icons'
 
 const BOX_WIDTH = `48px`
 
@@ -12,35 +12,48 @@ const Scoreboard = ({
   shot,
   yellowHammer,
   visibleScoreDetails,
+  setHoveringTrash,
 }) => (
-  <Container>
-    <StyledFrameboard>
-      {visibleScoreDetails.frame && (
-        <Framebox>
-          <h2>Frame</h2>
-          <Box>{frame}</Box>
-        </Framebox>
+  <>
+    <Container>
+      <StyledFrameboard>
+        {visibleScoreDetails.frame && (
+          <Framebox>
+            <h2>Frame</h2>
+            <Box>{frame}</Box>
+          </Framebox>
+        )}
+        {visibleScoreDetails.shot && (
+          <Framebox>
+            <h2>Shot</h2>
+            <Box>{shot}</Box>
+          </Framebox>
+        )}
+      </StyledFrameboard>
+      {visibleScoreDetails.score && (
+        <StyledScoreboard>
+          <Scorebox className="is-yellow">
+            <Box>{yellowScore}</Box>
+            {yellowHammer && <HammerIcon icon={faHammer} />}
+          </Scorebox>
+          <Scorebox className="is-black" inverted>
+            <Box>{blackScore}</Box>
+            {!yellowHammer && <HammerIcon icon={faHammer} />}
+          </Scorebox>
+        </StyledScoreboard>
       )}
-      {visibleScoreDetails.shot && (
-        <Framebox>
-          <h2>Shot</h2>
-          <Box>{shot}</Box>
-        </Framebox>
-      )}
-    </StyledFrameboard>
-    {visibleScoreDetails.score && (
-      <StyledScoreboard>
-        <Scorebox className="is-yellow">
-          <Box>{yellowScore}</Box>
-          {yellowHammer && <HammerIcon icon={faHammer} />}
-        </Scorebox>
-        <Scorebox className="is-black" inverted>
-          <Box>{blackScore}</Box>
-          {!yellowHammer && <HammerIcon icon={faHammer} />}
-        </Scorebox>
-      </StyledScoreboard>
-    )}
-  </Container>
+    </Container>
+    <TrashIcon
+      icon={faTrash}
+      size="sm"
+      onMouseEnter={() => {
+        setHoveringTrash(true)
+      }}
+      onMouseLeave={() => {
+        setHoveringTrash(false)
+      }}
+    />
+  </>
 )
 
 export default Scoreboard
@@ -82,6 +95,26 @@ const Scorebox = styled.div`
 
   &.is-black > * {
     background-color: ${biscuitColor.dark};
+  }
+`
+
+const TrashIcon = styled(FontAwesomeIcon)`
+  position: absolute;
+  cursor: pointer;
+  box-sizing: content-box;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  height: 24px;
+  width: 24px;
+  /* box-shadow: -5px -5px 30px -10px; */
+  z-index: 5;
+
+  &:hover {
+    transform: scale(1.1);
   }
 `
 

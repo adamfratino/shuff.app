@@ -4,16 +4,29 @@ import { darken } from 'polished'
 import { updateBiscuitCoordinates } from '../utils'
 import { biscuitColor } from '../tokens'
 
-const Biscuit = ({ color, biscuitNumber, biscuits, setBiscuits, visibleNumbers }) => {
+const Biscuit = ({
+  color,
+  biscuitNumber,
+  biscuits,
+  setBiscuits,
+  visibleNumbers,
+  hoveringTrash,
+}) => {
   const handleDrag = (e, el) => {
+    // if hoveringTrash === false
     const updatedCoords = updateBiscuitCoordinates(e, el)
     const newBiscuitsArray = { ...biscuits }
+    // else hoveringTrash === true
+    // remove biscuit from array
 
+    // update coordinates
     color === biscuitColor.light
       ? (newBiscuitsArray.yellow[biscuitNumber] = updatedCoords)
       : (newBiscuitsArray.black[biscuitNumber] = updatedCoords)
 
     setBiscuits(newBiscuitsArray)
+
+    console.log('dropped on trash: ', hoveringTrash)
   }
 
   return (
@@ -71,6 +84,7 @@ const StyledBiscuit = styled.span`
     cursor: grabbing;
     opacity: 0.75;
     transform: scale(4);
+    z-index: 10;
 
     @media (min-width: 900px) {
       transform: scale(2);

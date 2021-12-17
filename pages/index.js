@@ -37,6 +37,7 @@ const Home = () => {
   const [visibleNumbers, setVisibleNumbers] = useState(false)
   const [visibleScoreDetails, setVisibleScoreDetails] = useState(initialScoreDetails)
   const [theme, setTheme] = useState(defaultTheme)
+  const [hoveringTrash, setHoveringTrash] = useState(false)
   const router = useRouter()
 
   useEffect(() => {
@@ -53,6 +54,7 @@ const Home = () => {
             biscuits={biscuits}
             setBiscuits={setBiscuits}
             visibleNumbers={visibleNumbers}
+            hoveringTrash={hoveringTrash}
           >
             <Scoreboard
               yellowHammer={yellowHammer}
@@ -61,6 +63,7 @@ const Home = () => {
               frame={score.frame}
               shot={score.shot}
               visibleScoreDetails={visibleScoreDetails}
+              setHoveringTrash={setHoveringTrash}
             />
           </PlayArea>
           <Navigation
