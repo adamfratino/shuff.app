@@ -1,37 +1,35 @@
-import { getUserWithUsername, postToJSON } from '../../lib/firebase'
-import { PostFeed, UserProfile } from '../../components/ranked'
+import { getUserWithUsername, postToJSON } from '../../lib/firebase';
+import { UserProfile, PostFeed } from '../../components/ranked';
 
 export async function getServerSideProps({ query }) {
-  const { username } = query
+  const { username } = query;
 
-  const userDoc = await getUserWithUsername(username)
+  const userDoc = await getUserWithUsername(username);
 
   // JSON serializable data
-  let user = null
-  let posts = null
+  let user = null;
+  let posts = null;
 
   if (userDoc) {
-    user = userDoc.data()
-    const matchesQuery = userDoc.ref
-      .collection('matches')
+    user = userDoc.data();
+    const postsQuery = userDoc.ref
+      .collection('posts')
       .where('published', '==', true)
       .orderBy('createdAt', 'desc')
-      .limit(5)
-    posts = (await matchesQuery.get()).docs.map(postToJSON)
+      .limit(5);
+    posts = (await postsQuery.get()).docs.map(postToJSON);
   }
 
   return {
-    props: { user, matches }, // will be passed to the page component as props
-  }
+    props: { user, posts }, // will be passed to the page component as props
+  };
 }
 
-const UserProfilePage = ({ user, posts }) => {
+export default function UserProfilePage({ user, posts }) {
   return (
     <main>
       <UserProfile user={user} />
       <PostFeed posts={posts} />
     </main>
-  )
+  );
 }
-
-export default UserProfilePage

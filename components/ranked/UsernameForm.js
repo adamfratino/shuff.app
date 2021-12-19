@@ -72,26 +72,7 @@ const UsernameForm = () => {
 
   return (
     !username && (
-      <section style={{ padding: '32px 16px' }}>
-        <Header as="h4" style={{ marginBottom: '24px' }}>
-          👋 Welcome to Big Money Ranked Mode!
-        </Header>
-        <Message warning style={{ marginBottom: '24px' }} size="tiny">
-          <p>
-            The last thing you need to do to get started is register a unique username so
-            we can create your profile page.
-          </p>
-          <p>
-            Any combination of 3-15 numbers or letters (capital or lowercase) is allowed.
-            If the username is already taken we'll let you know.
-          </p>
-          <p>
-            <strong>
-              You won't be able to change your username after you make your pick, so
-              choose carefully!
-            </strong>
-          </p>
-        </Message>
+      <div>
         <Form onSubmit={onSubmit}>
           <Form.Field>
             <label style={{ marginBottom: '4px' }}>Search available usernames:</label>
@@ -116,10 +97,10 @@ const UsernameForm = () => {
           </Form.Field>
           <UsernameMessage username={formValue} isValid={isValid} loading={loading} />
           <Button type="submit" disabled={!isValid} color="teal" fluid size="big">
-            Pick Username
+            Lock It In
           </Button>
         </Form>
-      </section>
+      </div>
     )
   )
 }
