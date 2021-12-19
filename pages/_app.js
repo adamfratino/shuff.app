@@ -1,11 +1,15 @@
 import '../styles/globals.css'
-import { UserProvider } from '@auth0/nextjs-auth0'
+import 'semantic-ui-css/semantic.min.css'
+import { UserContext } from '../lib/context'
+import { useUserData } from '../lib/hooks'
 
-function MyApp({ Component, pageProps }) {
+const MyApp = ({ Component, pageProps }) => {
+  const userData = useUserData()
+
   return (
-    <UserProvider>
+    <UserContext.Provider value={userData}>
       <Component {...pageProps} />
-    </UserProvider>
+    </UserContext.Provider>
   )
 }
 
